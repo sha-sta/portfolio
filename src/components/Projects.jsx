@@ -5,34 +5,34 @@ const projects = [
   {
     title: "fumble",
     role: "gamified ai social platform",
-    description: "real-time event-driven social platform serving 2k+ users.",
-    tags: ["next.js", "typescript", "mongodb", "redis", "socket.io"],
+    description: "architected a real-time event-driven social platform serving 2k+ users with sub-100ms latency via websockets and redis pub/sub.",
+    tags: ["next.js", "mongodb", "redis", "socket.io"],
     links: { github: "#", live: "#" },
-    image: "https://placehold.co/600x400/1a1a1a/666666?text=fumble"
+    image: "/fumble-logo.png"
   },
   {
     title: "galatea",
-    role: "democratizing water quality monitoring",
-    description: "dual-model architecture to impute sparse spatiotemporal data and predict biochemical oxygen demand 50x cheaper than sota sensors.",
+    role: "dual graph architecture for water quality prediction",
+    description: "designed a dual-model architecture (graph-based matrix factorization + gnn) to impute missing spatiotemporal data with state-of-the-art accuracy.",
     tags: ["pytorch", "scikit-learn"],
     links: { github: "#", live: "#" },
-    image: "https://placehold.co/600x400/1a1a1a/666666?text=galatea"
+    image: "/galatea-image.png"
   },
   {
     title: "ivry",
-    role: "unified trading terminal",
+    role: "unified prediction market trading terminal",
     description: "high-frequency arbitrage engine and unified trading terminal aggregating liquidity across regulated and defi markets with <10µs latency.",
     tags: ["c++", "next.js", "fastapi", "supabase"],
     links: { github: "#", live: "#" },
-    image: "https://placehold.co/600x400/1a1a1a/666666?text=ivry"
+    image: ""
   },
   {
     title: "blindspot",
-    role: "real-time safety app",
+    role: "real-time safety app for the visually impaired",
     description: "detecting emergencies via multimodal ai analysis with <500ms latency and automated context-aware 911 dispatch.",
     tags: ["react native", "next.js", "supabase"],
     links: { github: "#", live: "#" },
-    image: "https://placehold.co/600x400/1a1a1a/666666?text=blindspot"
+    image: ""
   }
 ];
 
@@ -56,15 +56,16 @@ const Projects = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="group relative flex flex-col h-full"
+            className="group relative flex flex-col h-full cursor-pointer"
+            whileHover={{ scale: 1.02 }}
           >
             {/* Minimal Image Container */}
-            <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-neutral-900 border border-neutral-800 mb-6 group-hover:border-neutral-600 transition-colors">
-              <div className="absolute inset-0 bg-neutral-900/10 group-hover:bg-transparent transition-colors z-10" />
+            <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-transparent mb-6 transition-colors">
+              <div className="absolute inset-0 bg-transparent z-10" />
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0"
+                className="w-full h-full object-contain"
               />
             </div>
 
@@ -85,10 +86,6 @@ const Projects = () => {
               </div>
 
               <p className="text-purple-300 text-sm font-medium mb-3 lowercase">{project.role}</p>
-
-              <p className="text-neutral-400 text-lg leading-relaxed mb-6 lowercase">
-                {project.description}
-              </p>
 
               <div className="flex flex-wrap gap-x-4 gap-y-2 mt-auto">
                 {project.tags.map(tag => (

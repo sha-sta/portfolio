@@ -24,11 +24,11 @@ function App() {
 
   return (
     <div className="min-h-screen bg-neutral-950 text-white selection:bg-purple-500/30 overflow-x-hidden">
-      <div className="fixed inset-0 z-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neutral-900 via-neutral-950 to-neutral-950 pointer-events-none" />
-      
+      <div className="fixed inset-0 z-0 bg-neutral-950 pointer-events-none" />
+
       {/* Custom Cursor */}
       <motion.div
-        className="fixed top-0 left-0 w-6 h-6 border border-white/20 rounded-full pointer-events-none z-50 mix-blend-difference backdrop-blur-sm hidden md:block"
+        className="fixed top-0 left-0 w-6 h-6 border-none rounded-full pointer-events-none z-[9999] mix-blend-difference backdrop-blur-sm hidden md:block bg-purple-400/20"
         animate={{
           x: mousePosition.x - 12,
           y: mousePosition.y - 12,
@@ -40,18 +40,18 @@ function App() {
           mass: 0.8
         }}
       />
-      
-      {/* Fixed Navbar */}
-      <div className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
-        <div className="max-w-4xl mx-auto px-6 py-8 md:px-12 md:py-12">
+
+      {/* Fixed Navbar Container */}
+      <div className="fixed top-0 left-0 right-0 z-40 bg-neutral-950 backdrop-blur-md border-b border-neutral-900/50">
+        <div className="max-w-4xl mx-auto px-6 pt-3 pb-1.5 md:px-12 md:pt-4 md:pb-2 relative -z-10">
           <Navbar />
         </div>
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-50">
         <Hero />
       </div>
-      
+
       {/* Main Content with Background to cover Hero */}
       <div className="relative z-20 bg-neutral-950 border-t border-neutral-900/50 min-h-screen">
         <div className="max-w-4xl mx-auto px-6 md:px-12 pt-32 pb-32 space-y-32">
@@ -60,7 +60,7 @@ function App() {
           <Education />
           <Contact />
         </div>
-        
+
         <footer className="py-12 text-center text-neutral-600 text-sm">
           <p>© {new Date().getFullYear()} Christian Yoon.</p>
         </footer>

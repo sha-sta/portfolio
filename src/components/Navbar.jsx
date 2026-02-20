@@ -19,7 +19,7 @@ const Navbar = () => {
   useMotionValueEvent(scrollY, "change", (latest) => {
     // Trigger transition later to match the new slow struggle timing
     // We can also check position dynamically here if needed
-    const shouldShow = latest > 600;
+    const shouldShow = latest > 650;
 
     if (shouldShow && !showName) {
       setExploded(true);
