@@ -9,17 +9,13 @@ const Navbar = () => {
   const logoRef = useRef(null);
   const navRef = useRef(null);
 
-  // Expose refs to window for Hero component to read
-  useEffect(() => {
-    if (logoRef.current) {
-      window.navbarLogoRect = logoRef.current.getBoundingClientRect();
-    }
-  }, []);
-
   useMotionValueEvent(scrollY, "change", (latest) => {
     // Trigger transition later to match the new slow struggle timing
-    // We can also check position dynamically here if needed
-    const shouldShow = latest > 650;
+    // We match this with Hero's progress (which is based on viewport height)
+    // Hero fades out at ~0.71 progress. We want Navbar text to appear before that.
+    // 0.6 * window.innerHeight ensures overlap on all screen sizes.
+    const threshold = window.innerHeight * 0.6;
+    const shouldShow = latest > threshold;
 
     if (shouldShow && !showName) {
       setExploded(true);
@@ -47,6 +43,9 @@ const Navbar = () => {
         ref={logoRef}
         className="relative flex items-center h-full w-48"
       >
+        {/* Invisible target for Hero animation calculation */}
+        <div id="navbar-logo-target" className="absolute left-0 top-1/2 -translate-y-1/2 w-px h-px opacity-0 pointer-events-none" />
+
         <Explosion active={exploded} />
 
         <AnimatePresence>

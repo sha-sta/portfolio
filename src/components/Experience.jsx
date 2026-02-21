@@ -33,14 +33,14 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="scroll-mt-24 mb-32">
+    <section id="experience" className="scroll-mt-24 mb-64">
       <motion.h2
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="text-base font-mono text-neutral-500 mb-16 uppercase tracking-widest"
+        className="text-2xl md:text-3xl font-medium text-neutral-400 mb-16"
       >
-        work
+        work.
       </motion.h2>
 
       <div className="space-y-20">
@@ -54,7 +54,7 @@ const Experience = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="group flex gap-8 items-start cursor-pointer hover:translate-x-2 hover:scale-[1.02] transition-all duration-300 ease-out"
+            className="group flex gap-8 items-center cursor-pointer hover:translate-x-2 hover:scale-[1.02] transition-all duration-300 ease-out"
           >
             <div className={`hidden md:flex shrink-0 w-24 h-24 items-center justify-center ${exp.company === "National Institute of Standards and Technology" ? "-mt-4" : ""}`}>
               <img
@@ -74,17 +74,13 @@ const Experience = () => {
                     {exp.company}
                   </h3>
                 </div>
-                <span className="text-sm font-mono text-neutral-500">{exp.period}</span>
+                <span className="md:text-lg text-md font-medium text-neutral-400">{exp.period}</span>
               </div>
 
               <div className="flex justify-between items-center mb-4">
-                <div className="text-purple-300 text-lg font-medium">{exp.role}</div>
-                <span className="text-sm text-neutral-600 hidden sm:block">{exp.location}</span>
+                <div className="text-purple-300 text-md md:text-lg font-medium">{exp.role}</div>
+                <span className="text-md md:text-lg text-neutral-400 hidden sm:block">{exp.location}</span>
               </div>
-
-              <p className="text-neutral-300 text-lg leading-relaxed lowercase max-w-4xl">
-                {exp.description}
-              </p>
             </div>
           </motion.a>
         ))}
