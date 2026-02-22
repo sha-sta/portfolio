@@ -7,7 +7,7 @@ const projects = [
     role: "gamified ai social platform",
     description: "architected a real-time event-driven social platform serving 2k+ users with sub-100ms latency via websockets and redis pub/sub.",
     tags: ["next.js", "mongodb", "redis", "socket.io"],
-    links: { github: "#", live: "#" },
+    links: { live: "https://www.fumble.chat/" },
     image: "/fumble-logo.png"
   },
   {
@@ -15,7 +15,7 @@ const projects = [
     role: "dual graph model for water quality prediction",
     description: "designed a dual-model architecture (graph-based matrix factorization + gnn) to impute missing spatiotemporal data with state-of-the-art accuracy.",
     tags: ["pytorch", "scikit-learn"],
-    links: { github: "#", live: "#" },
+    links: { github: "https://github.com/sha-sta/GALATEA" },
     image: "/galatea-image.png"
   },
   {
@@ -43,7 +43,7 @@ const Projects = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="text-2xl md:text-3xl font-medium text-neutral-400 mb-16"
+        className="text-2xl md:text-3xl font-medium mb-16"
       >
         projects.
       </motion.h2>
@@ -57,44 +57,53 @@ const Projects = () => {
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
             className="group relative flex flex-col h-full cursor-pointer"
-            whileHover={{ scale: 1.02 }}
           >
-            {/* Minimal Image Container */}
-            <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-transparent mb-6 transition-colors p-4">
-              <div className="absolute inset-0 bg-transparent z-10" />
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-contain"
-              />
-            </div>
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+              className="flex flex-col h-full"
+            >
+              {/* Minimal Image Container */}
+              <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-transparent mb-6 transition-colors p-4">
+                <div className="absolute inset-0 bg-transparent z-10" />
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-contain"
+                />
+              </div>
 
-            {/* Content */}
-            <div className="flex flex-col flex-grow">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="text-2xl font-medium text-neutral-100 group-hover:text-white transition-colors">
-                  {project.title}
-                </h3>
-                <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <a href={project.links.github} className="text-neutral-500 hover:text-white transition-colors" aria-label="GitHub">
-                    <Github size={20} />
-                  </a>
-                  <a href={project.links.live} className="text-neutral-500 hover:text-white transition-colors" aria-label="Live Demo">
-                    <ArrowUpRight size={20} />
-                  </a>
+              {/* Content */}
+              <div className="flex flex-col flex-grow">
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-2xl font-medium text-neutral-100 group-hover:text-white transition-colors">
+                    {project.title}
+                  </h3>
+                  <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {project.links.github && (
+                      <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors" aria-label="GitHub">
+                        <Github size={20} />
+                      </a>
+                    )}
+                    {project.links.live && (
+                      <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors" aria-label="Live Demo">
+                        <ArrowUpRight size={20} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                <p className="text-purple-300 text-md md:text-lg font-medium mb-3 lowercase">{project.role}</p>
+
+                <div className="flex flex-wrap gap-x-4 gap-y-2 mt-auto">
+                  {project.tags.map(tag => (
+                    <span key={tag} className="md:text-lg text-md font-medium text-neutral-400 lowercase">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
-
-              <p className="text-purple-300 text-md md:text-lg font-medium mb-3 lowercase">{project.role}</p>
-
-              <div className="flex flex-wrap gap-x-4 gap-y-2 mt-auto">
-                {project.tags.map(tag => (
-                  <span key={tag} className="md:text-lg text-md font-medium text-neutral-400 lowercase">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+            </motion.div>
           </motion.div>
         ))}
       </div>

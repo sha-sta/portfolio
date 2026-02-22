@@ -42,7 +42,7 @@ function App() {
 
       {/* Main Content with Background to cover Hero */}
       <div className="relative z-20 bg-neutral-950 border-t border-neutral-900/50 min-h-screen">
-        <div className="max-w-6xl mx-auto px-6 md:px-12 pt-32 pb-32 space-y-32">
+        <div className="max-w-6xl mx-auto px-6 md:px-12 space-y-32">
           <Experience />
           <Projects />
           <Contact />

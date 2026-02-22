@@ -20,7 +20,7 @@ const Navbar = () => {
   }, []);
 
   // Thresholds (as fraction of viewport height scrolled)
-  const SLIDE_START = 0.7;
+  const SLIDE_START = 0.62;
   const SLIDE_END = 0.95;
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -31,7 +31,9 @@ const Navbar = () => {
       if (phase !== 'hidden') setPhase('hidden');
       slideOpacity.set(0);
     } else if (progress >= SLIDE_START && progress < SLIDE_END) {
-      if (phase !== 'sliding') setPhase('sliding');
+      if (phase !== 'sliding') {
+        setPhase('sliding');
+      }
 
       const t = (progress - SLIDE_START) / (SLIDE_END - SLIDE_START);
 
@@ -53,10 +55,14 @@ const Navbar = () => {
   });
 
   const links = [
-    { name: 'projects', href: '#projects' },
-    { name: 'experience', href: '#experience' },
-    { name: 'contact', href: '#contact' },
+    { name: 'experience.', id: 'experience' },
+    { name: 'projects.', id: 'projects' },
+    { name: 'contact.', id: 'contact' },
   ];
+
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <>
@@ -106,12 +112,12 @@ const Navbar = () => {
         <ul className="flex gap-6 text-md text-neutral-400 lowercase pointer-events-auto">
           {links.map((link) => (
             <li key={link.name}>
-              <a
-                href={link.href}
-                className="hover:text-white transition-colors duration-200"
+              <button
+                onClick={() => scrollTo(link.id)}
+                className="hover:text-white transition-colors duration-200 cursor-pointer"
               >
                 {link.name}
-              </a>
+              </button>
             </li>
           ))}
         </ul>

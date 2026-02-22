@@ -15,19 +15,21 @@ const Hero = () => {
     //
     // Text starts at viewport center (50vh from top).
     // Navbar is ~3-5vh from top. So we move up ~46vh.
-    const y = useTransform(scrollYProgress, [0, 0.3], ["0vh", "28vh"]);
-    const scale = useTransform(scrollYProgress, [0, 0.45], [1, 0.04]);
-    const opacity = useTransform(scrollYProgress, [0, 0.35, 0.45], [1, 0.6, 0]);
+    const y = useTransform(scrollYProgress, [0, 0.3], ["0vh", "21vh"]);
+    const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.04]);
+    // Hero fades out just after crossing behind the navbar.
+    // Navbar slide starts at scroll 0.7*vh = hero progress 0.35.
+    const opacity = useTransform(scrollYProgress, [0, 0.4, 0.43], [1, 0.7, 0]);
 
     return (
         <section
             ref={sectionRef}
-            className="h-[200vh] w-full relative"
+            className="h-[150vh] w-full relative"
         >
             <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden -z-10">
                 <motion.h1
                     style={{ y, scale, opacity }}
-                    className="text-7xl md:text-9xl font-bold tracking-tighter leading-[0.9] text-white whitespace-nowrap pointer-events-none origin-center"
+                    className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.9] text-white whitespace-nowrap pointer-events-none origin-center"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
