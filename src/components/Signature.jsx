@@ -17,7 +17,7 @@ const Signature = () => {
         if (saved) setUserVote(saved);
 
         if (!API_URL) return;
-        fetch(API_URL)
+        fetch(API_URL, { redirect: 'follow' })
             .then(res => res.json())
             .then(data => setVotes({ up: data.up || 0, down: data.down || 0 }))
             .catch(() => { });
@@ -39,9 +39,12 @@ const Signature = () => {
             try {
                 await fetch(API_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify({ type, previous: userVote }),
+                    redirect: 'manual',
                 });
+                // Google Apps Script returns 302 — the write happens before the redirect,
+                // so we don't need to follow it or read the response.
             } catch {
                 setVotes(prev);
             }
