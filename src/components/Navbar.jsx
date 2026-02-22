@@ -109,7 +109,7 @@ const Navbar = () => {
           )}
         </div>
 
-        <ul className="flex gap-6 text-md text-neutral-400 lowercase pointer-events-auto">
+        <ul className="hidden md:flex gap-6 text-md text-neutral-400 lowercase pointer-events-auto">
           {links.map((link) => (
             <li key={link.name}>
               <button
