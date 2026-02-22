@@ -6,6 +6,7 @@ import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Education from './components/Education';
 import Contact from './components/Contact';
+import Signature from './components/Signature';
 
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -42,14 +43,14 @@ function App() {
 
       {/* Main Content with Background to cover Hero */}
       <div className="relative z-20 bg-neutral-950 border-t border-neutral-900/50 min-h-screen">
-        <div className="max-w-6xl mx-auto px-6 md:px-12 space-y-32">
+        <div className="max-w-6xl mx-auto px-6 md:px-12">
           <Experience />
           <Projects />
           <Contact />
         </div>
 
-        <footer className="py-12 text-center text-neutral-600 text-sm">
-          <p>© {new Date().getFullYear()} Christian Yoon.</p>
+        <footer>
+          <Signature />
         </footer>
       </div>
     </div>

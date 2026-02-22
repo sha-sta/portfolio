@@ -33,7 +33,7 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="scroll mb-64 pt-24">
+    <section id="experience" className="scroll mb-64 pt-24 border border-neutral-800 rounded-2xl p-8 md:p-12">
       <motion.h2
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}

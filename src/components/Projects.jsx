@@ -38,7 +38,7 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="scroll-mt-24 mb-64">
+    <section id="projects" className="scroll-mt-24 mb-64 border border-neutral-800 rounded-2xl p-8 md:p-12">
       <motion.h2
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}

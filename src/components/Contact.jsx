@@ -3,7 +3,7 @@ import { Mail, Linkedin, Github, ArrowRight } from 'lucide-react';
 
 const Contact = () => {
   return (
-    <section id="contact" className="scroll border-neutral-900">
+    <section id="contact" className="scroll border border-neutral-800 rounded-2xl p-8 md:p-12">
       <div className="flex flex-col md:flex-row justify-between items-center gap-8">
         <div>
           <h2 className="text-4xl font-bold text-white">hit me up.</h2>
