@@ -1,28 +1,55 @@
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent, useMotionValue } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Explosion from './Explosion';
 
 const Navbar = () => {
-  const [showName, setShowName] = useState(false);
+  const [phase, setPhase] = useState('hidden'); // 'hidden' | 'sliding' | 'landed'
   const [exploded, setExploded] = useState(false);
+  const [portalTarget, setPortalTarget] = useState(null);
   const { scrollY } = useScroll();
-  const logoRef = useRef(null);
   const navRef = useRef(null);
 
+  // Motion values for the slide animation (center → left)
+  const slideX = useMotionValue(0);
+  const slideOpacity = useMotionValue(0);
+
+  // Find the portal target on mount
+  useEffect(() => {
+    setPortalTarget(document.getElementById('navbar-container'));
+  }, []);
+
+  // Thresholds (as fraction of viewport height scrolled)
+  const SLIDE_START = 0.7;
+  const SLIDE_END = 0.95;
+
   useMotionValueEvent(scrollY, "change", (latest) => {
-    // Trigger transition later to match the new slow struggle timing
-    // We match this with Hero's progress (which is based on viewport height)
-    // Hero fades out at ~0.71 progress. We want Navbar text to appear before that.
-    // 0.6 * window.innerHeight ensures overlap on all screen sizes.
-    const threshold = window.innerHeight * 0.6;
-    const shouldShow = latest > threshold;
+    const vh = window.innerHeight;
+    const progress = latest / vh;
 
-    if (shouldShow && !showName) {
-      setExploded(true);
-      setTimeout(() => setExploded(false), 600);
+    if (progress < SLIDE_START) {
+      if (phase !== 'hidden') setPhase('hidden');
+      slideOpacity.set(0);
+    } else if (progress >= SLIDE_START && progress < SLIDE_END) {
+      if (phase !== 'sliding') setPhase('sliding');
+
+      const t = (progress - SLIDE_START) / (SLIDE_END - SLIDE_START);
+
+      const navWidth = navRef.current?.offsetWidth || window.innerWidth;
+      const startX = navWidth / 2 - 80;
+      const endX = 0;
+
+      slideX.set(startX + t * (endX - startX));
+      slideOpacity.set(Math.min(t * 1.5, 1));
+    } else {
+      if (phase !== 'landed') {
+        setPhase('landed');
+        setExploded(true);
+        setTimeout(() => setExploded(false), 600);
+      }
+      slideX.set(0);
+      slideOpacity.set(1);
     }
-
-    setShowName(shouldShow);
   });
 
   const links = [
@@ -32,60 +59,64 @@ const Navbar = () => {
   ];
 
   return (
-    <motion.nav
-      ref={navRef}
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="flex justify-between items-center w-full relative h-12"
-    >
-      <div
-        ref={logoRef}
-        className="relative flex items-center h-full w-48"
-      >
-        {/* Invisible target for Hero animation calculation */}
-        <div id="navbar-logo-target" className="absolute left-0 top-1/2 -translate-y-1/2 w-px h-px opacity-0 pointer-events-none" />
-
-        <Explosion active={exploded} />
-
-        <AnimatePresence>
-          {showName && (
+    <>
+      {/* Sliding text — portaled into navbar-container at z-[5], BEHIND the z-10 background */}
+      {phase === 'sliding' && portalTarget && createPortal(
+        <div className="absolute inset-0 z-5 flex items-center pointer-events-none">
+          <div className="max-w-6xl mx-auto px-6 md:px-12 w-full">
             <motion.div
-              initial={{ scale: 0.5, opacity: 0, x: -10, y: -5 }} // Start slightly offset to initiate direction
-              animate={{
-                scale: 1,
-                opacity: 1,
-                x: 0,
-                y: 0,
-              }}
-              exit={{ scale: 0.5, opacity: 0, transition: { duration: 0.2 } }}
+              style={{ x: slideX, opacity: slideOpacity }}
+              className="font-bold text-xl tracking-tighter text-white pl-1 whitespace-nowrap"
+            >
+              christian yoon.
+            </motion.div>
+          </div>
+        </div>,
+        portalTarget
+      )}
+
+      <motion.nav
+        ref={navRef}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="flex justify-between items-center w-full relative h-12"
+      >
+        <div className="relative flex items-center h-full w-48">
+          <Explosion active={exploded} />
+
+          {/* Landed phase: text pops IN FRONT with bounce */}
+          {phase === 'landed' && (
+            <motion.div
+              initial={{ scale: 1.15, x: 5 }}
+              animate={{ scale: 1, x: 0 }}
               transition={{
                 type: "spring",
                 stiffness: 600,
                 damping: 15,
                 mass: 1,
               }}
-              className="font-bold text-xl tracking-tighter text-white pointer-events-auto pl-1 absolute left-0"
+              className="font-bold text-xl tracking-tighter text-white pl-1 absolute left-0 whitespace-nowrap"
             >
               christian yoon.
             </motion.div>
           )}
-        </AnimatePresence>
-      </div>
+        </div>
 
-      <ul className="flex gap-6 text-md text-neutral-400 lowercase pointer-events-auto">
-        {links.map((link) => (
-          <li key={link.name}>
-            <a
-              href={link.href}
-              className="hover:text-white transition-colors duration-200"
-            >
-              {link.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </motion.nav>
+        <ul className="flex gap-6 text-md text-neutral-400 lowercase pointer-events-auto">
+          {links.map((link) => (
+            <li key={link.name}>
+              <a
+                href={link.href}
+                className="hover:text-white transition-colors duration-200"
+              >
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </motion.nav>
+    </>
   );
 };
 

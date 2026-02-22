@@ -27,8 +27,11 @@ function App() {
       <div className="fixed inset-0 z-0 bg-neutral-950 pointer-events-none" />
 
       {/* Fixed Navbar Container */}
-      <div className="fixed top-0 left-0 right-0 z-40 bg-neutral-950 backdrop-blur-md border-b border-neutral-900/50">
-        <div className="max-w-6xl mx-auto px-6 pt-3 pb-1.5 md:px-12 md:pt-4 md:pb-2 relative">
+      <div id="navbar-container" className="fixed top-0 left-0 right-0 z-40">
+        {/* Background layer (z-10) — sliding text goes behind this visually via z-[5] */}
+        <div className="absolute inset-0 bg-neutral-950/70 backdrop-blur-md border-b border-neutral-900/50 z-10" />
+        {/* Content layer (z-20) — nav links + landed text on top */}
+        <div className="relative z-20 max-w-6xl mx-auto px-6 pt-3 pb-1.5 md:px-12 md:pt-4 md:pb-2">
           <Navbar />
         </div>
       </div>
