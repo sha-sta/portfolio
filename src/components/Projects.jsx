@@ -79,7 +79,7 @@ const Projects = () => {
                   <h3 className="text-2xl font-medium text-neutral-100 group-hover:text-white transition-colors">
                     {project.title}
                   </h3>
-                  <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex gap-3 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
                     {project.links.github && (
                       <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm text-neutral-300 hover:text-neutral-950 hover:bg-white transition-all duration-200" aria-label="GitHub">
                         <Github size={18} />
