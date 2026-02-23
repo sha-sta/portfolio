@@ -79,15 +79,15 @@ const Projects = () => {
                   <h3 className="text-2xl font-medium text-neutral-100 group-hover:text-white transition-colors">
                     {project.title}
                   </h3>
-                  <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     {project.links.github && (
-                      <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors" aria-label="GitHub">
-                        <Github size={20} />
+                      <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm text-neutral-300 hover:text-neutral-950 hover:bg-white transition-all duration-200" aria-label="GitHub">
+                        <Github size={18} />
                       </a>
                     )}
                     {project.links.live && (
-                      <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors" aria-label="Live Demo">
-                        <ArrowUpRight size={20} />
+                      <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm text-neutral-300 hover:text-neutral-950 hover:bg-white transition-all duration-200" aria-label="Live Demo">
+                        <ArrowUpRight size={18} />
                       </a>
                     )}
                   </div>

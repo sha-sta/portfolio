@@ -69,18 +69,18 @@ const Signature = () => {
                 />
 
                 <div className="flex flex-col items-center gap-5">
-                    <p className="text-neutral-500 text-md">rate my signature :)</p>
+                    <p className="text-neutral-400 text-md">rate my signature :)</p>
                     <div className="flex items-center gap-3">
                         <button
                             onClick={() => handleVote('up')}
                             disabled={loading}
-                            className={`p-2 rounded-lg transition-all duration-200 cursor-pointer ${userVote === 'up'
-                                ? 'text-green-400 bg-green-400/10'
-                                : 'text-neutral-500 hover:text-green-400 hover:bg-green-400/5'
+                            className={`w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-sm transition-all duration-200 cursor-pointer ${userVote === 'up'
+                                ? 'text-green-400 bg-green-400/20'
+                                : 'text-neutral-300 bg-white/10 hover:text-neutral-950 hover:bg-white'
                                 }`}
                             aria-label="Upvote signature"
                         >
-                            <ThumbsUp size={25} />
+                            <ThumbsUp size={18} />
                         </button>
 
                         <AnimatePresence mode="wait">
@@ -100,13 +100,13 @@ const Signature = () => {
                         <button
                             onClick={() => handleVote('down')}
                             disabled={loading}
-                            className={`p-2 rounded-lg transition-all duration-200 cursor-pointer ${userVote === 'down'
-                                ? 'text-red-400 bg-red-400/10'
-                                : 'text-neutral-500 hover:text-red-400 hover:bg-red-400/5'
+                            className={`w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-sm transition-all duration-200 cursor-pointer ${userVote === 'down'
+                                ? 'text-red-400 bg-red-400/20'
+                                : 'text-neutral-300 bg-white/10 hover:text-neutral-950 hover:bg-white'
                                 }`}
                             aria-label="Downvote signature"
                         >
-                            <ThumbsDown size={25} />
+                            <ThumbsDown size={18} />
                         </button>
                     </div>
                 </div>
