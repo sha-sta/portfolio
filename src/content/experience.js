@@ -16,7 +16,7 @@ export const experience = [
     company: 'hazyeyes',
     role: 'founding engineer',
     when: 'mar to jun 2026',
-    link: 'https://hazyeyesai.com',
+    link: null,
     bullets: [
       'ML pipeline detecting alcohol impairment from OKN eye-tracking (CatBoost, Optuna, MLflow); landed an enterprise pilot with an Australian logistics company',
       'diffusion-generated synthetic eye data → 0.95 AUC on unseen real subjects under nested-holdout validation',

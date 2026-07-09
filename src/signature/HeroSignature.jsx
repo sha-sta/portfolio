@@ -20,7 +20,7 @@ function polylineLength(pts) {
 function SigStroke({ points, master, from, to, seed }) {
   const d = useMemo(() => catmullRomToPath(points, 0.9), [points]);
   const progress = useTransform(master, (v) => (v - from) / (to - from));
-  return <Stroke d={d} role="signature" progress={progress} seed={seed} widthScale={2.2} />;
+  return <Stroke d={d} role="signature" progress={progress} seed={seed} widthScale={2.0} />;
 }
 
 // `progress` is an external MotionValue (0 → 1); the owner sequences it so

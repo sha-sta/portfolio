@@ -7,6 +7,7 @@ import WorldSVG from './world/WorldSVG';
 import Marginalia from './world/Marginalia';
 import ArtPiece from './world/ArtPiece';
 import HeroSignature from './signature/HeroSignature';
+import GrainDefs from './charcoal/GrainDefs';
 import SketchNav from './nav/SketchNav';
 import IndexOverlay from './nav/IndexOverlay';
 import HeroSection from './world/sections/HeroSection';
@@ -79,6 +80,7 @@ function App() {
 
   return (
     <div className="text-ink">
+      <GrainDefs />
       <SketchNav onIndex={() => setIndexOpen(true)} />
       <IndexOverlay open={indexOpen} onClose={() => setIndexOpen(false)} />
       {mode === 'linear' ? (

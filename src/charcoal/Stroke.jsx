@@ -8,7 +8,7 @@ import { motion, useTransform, isMotionValue } from 'framer-motion';
 
 const MotionPath = motion.path;
 import { roughenPath } from './roughen';
-import { strokePasses, INK } from './strokeStyle';
+import { strokePasses, INK, GRAIN_PATTERN_ID } from './strokeStyle';
 
 export default function Stroke({
   d,
@@ -42,7 +42,7 @@ export default function Stroke({
           d={dd}
           pathLength={1}
           fill="none"
-          stroke={color}
+          stroke={passes[i].paint === 'grain' ? `url(#${GRAIN_PATTERN_ID}) #23201a` : color}
           strokeWidth={passes[i].width * widthScale}
           strokeOpacity={passes[i].opacity}
           strokeLinecap={passes[i].linecap}

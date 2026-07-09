@@ -14,9 +14,10 @@ export const sections = [
     id: 'hero',
     label: 'christian yoon.',
     hash: '',
-    // anchor = the signature flourish's end point: the line starts where the
-    // pen lifts. signature image point (690, 203) at SIGNATURE placement.
-    anchor: { x: 250 + 690 * 1.4, y: 450 + 203 * 1.4 },
+    // the line STARTS INSIDE the flourish tail (image point ~(614,196)) and
+    // passes through the flourish end (690, 203) as its first waypoint — the
+    // overlap hides the seam between signature and line completely.
+    anchor: { x: 250 + 614 * 1.4, y: 450 + 196 * 1.4 },
     view: { x: 1050, y: 780 },
     box: { x: 350, y: 320, w: 1400, h: 880 },
   },
@@ -34,9 +35,9 @@ export const sections = [
     id: 'projects',
     label: 'projects.',
     hash: 'projects',
-    anchor: { x: 1110, y: 2420 },
-    view: { x: 1970, y: 2340 },
-    box: { x: 1200, y: 1820, w: 1580, h: 1200 },
+    anchor: { x: 1050, y: 2420 },
+    view: { x: 2100, y: 2340 },
+    box: { x: 1330, y: 1820, w: 1580, h: 1200 },
   },
   {
     id: 'open-source',
@@ -62,8 +63,10 @@ export const segments = [
   {
     from: 'hero',
     to: 'work',
-    // leaves along the flourish's ending tangent (rightward, slight drop)
+    // first waypoint = the flourish's end point, so the overlap stretch
+    // traces the signature's own tail before continuing right
     waypoints: [
+      [250 + 690 * 1.4, 450 + 203 * 1.4],
       [1500, 785],
       [1900, 810],
     ],
@@ -72,17 +75,19 @@ export const segments = [
     from: 'work',
     to: 'projects',
     waypoints: [
-      [2050, 1380],
-      [1400, 1720],
-      [1020, 2050],
+      [2050, 1340],
+      [1330, 1640],
+      [960, 1990],
     ],
   },
   {
     from: 'projects',
     to: 'open-source',
+    // swings wide below the projects text (marketbrain's row), rises through
+    // the empty right column
     waypoints: [
-      [1800, 2640],
-      [2600, 2470],
+      [1650, 2880],
+      [2600, 2620],
     ],
   },
   {
