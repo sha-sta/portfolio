@@ -45,16 +45,14 @@ function WorldContent({ camera, progress, reduced }) {
       <WorldSVG camera={camera} progress={progress} gate={sig} />
       <Marginalia camera={camera} progress={progress} />
       <ArtPiece
-        camera={camera}
         progress={progress}
         src="/take-your-marks.webp"
-        caption="take your marks · charcoal, 2024"
-        x={2850}
-        y={2550}
-        w={840}
-        h={390}
-        seg={2}
-        frac={0.6}
+        title="take your marks"
+        credit="christian yoon"
+        x={5580}
+        y={2350}
+        w={760}
+        h={360}
       />
       {sections.map((s, i) => {
         const Section = SECTION_COMPONENTS[s.id];

@@ -6,7 +6,7 @@
 // the master line passes through. `entry`/`exit` angles are shaped by the
 // waypoints between anchors, editable live via /?editor (dev only).
 
-export const WORLD_W = 6000;
+export const WORLD_W = 6600;
 export const WORLD_H = 3400;
 
 export const sections = [
@@ -51,7 +51,7 @@ export const sections = [
     label: 'hit me up.',
     hash: 'contact',
     anchor: { x: 4690, y: 2780 },
-    view: { x: 5240, y: 2680 },
+    view: { x: 5420, y: 2650 },
     box: { x: 4780, y: 2380, w: 1080, h: 800 },
   },
 ];

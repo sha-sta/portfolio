@@ -35,14 +35,4 @@ export const projects = [
     ],
     links: [{ label: 'github', href: 'https://github.com/sha-sta/market-brain' }],
   },
-  {
-    id: 'fumble-app',
-    name: 'fumble',
-    tagline: 'gamified social, live in the wild',
-    badge: '2,000+ active users',
-    bullets: [
-      'gamified AI social platform built on Next.js, MongoDB, Redis, and Socket.IO',
-    ],
-    links: [{ label: 'live', href: 'https://www.fumble.chat' }],
-  },
 ];

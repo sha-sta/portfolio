@@ -86,7 +86,11 @@ export default function LinearApp({ reduced }) {
             {experience.map((e) => (
               <article key={e.id}>
                 <h3 className="font-display text-2xl font-medium lowercase">
-                  <a href={e.link} className="hover:text-sanguine" target="_blank" rel="noreferrer">{e.company} ↗</a>
+                  {e.link ? (
+                    <a href={e.link} className="hover:text-sanguine" target="_blank" rel="noreferrer">{e.company} ↗</a>
+                  ) : (
+                    e.company
+                  )}
                 </h3>
                 <p className="text-ink-faint mt-0.5 text-sm">{e.role} · {e.when}</p>
                 <ul className="mt-2 space-y-1.5 text-[15px] leading-relaxed">
@@ -130,18 +134,6 @@ export default function LinearApp({ reduced }) {
           </div>
         </section>
 
-        <figure className="mt-20">
-          <img
-            src="/take-your-marks.webp"
-            alt="Take Your Marks: charcoal drawing of a swimmer's feet on a starting block above a stormy sea"
-            loading="lazy"
-            className="border-hairline w-full border"
-          />
-          <figcaption className="font-hand text-ink-faint mt-2 text-sm">
-            take your marks · charcoal, 2024
-          </figcaption>
-        </figure>
-
         <section className="mt-20">
           <Heading id="open-source">open source.</Heading>
           <div className="flex items-baseline gap-3">
@@ -171,6 +163,19 @@ export default function LinearApp({ reduced }) {
             <a className={link} href={contact.linkedin} target="_blank" rel="noreferrer">linkedin ↗</a>
           </div>
           <p className="font-hand text-ink-faint mt-9 text-sm">drawn & written by hand. no template, promise.</p>
+
+          <figure className="mt-14">
+            <img
+              src="/take-your-marks.webp"
+              alt="take your marks, charcoal drawing by christian yoon"
+              loading="lazy"
+              className="border-hairline w-full border"
+            />
+            <figcaption className="mt-2">
+              <span className="font-display text-base italic">take your marks</span>
+              <span className="font-hand text-ink-faint block text-sm">christian yoon · charcoal · 2024</span>
+            </figcaption>
+          </figure>
         </section>
       </main>
     </div>

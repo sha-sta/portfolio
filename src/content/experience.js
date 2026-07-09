@@ -27,7 +27,7 @@ export const experience = [
     company: 'fumble',
     role: 'co-founder & founding engineer',
     when: 'jun to nov 2025',
-    link: 'https://www.fumble.chat',
+    link: null,
     bullets: [
       'real-time event-driven platform for 2,000+ active users, built on Next.js, Socket.IO, and Redis pub/sub',
       'set engineering standards for a 10-person team; landed a B2B pilot and $45K in Azure credits',

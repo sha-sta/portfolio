@@ -8,9 +8,13 @@ export default function WorkSection({ section, tStop, progress }) {
         {experience.map((e) => (
           <article key={e.id}>
             <h3 className="font-display text-[34px] font-medium lowercase">
-              <a href={e.link} className="hover:text-sanguine" target="_blank" rel="noreferrer">
-                {e.company} ↗
-              </a>
+              {e.link ? (
+                <a href={e.link} className="hover:text-sanguine" target="_blank" rel="noreferrer">
+                  {e.company} ↗
+                </a>
+              ) : (
+                e.company
+              )}
             </h3>
             <p className="text-ink-faint mt-1 text-[19px]">
               {e.role} · {e.when}

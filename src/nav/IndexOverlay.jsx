@@ -72,9 +72,13 @@ export default function IndexOverlay({ open, onClose }) {
           <ul className="space-y-2 text-lg">
             {experience.map((e) => (
               <li key={e.id}>
-                <a href={e.link} className="underline decoration-1 underline-offset-4 hover:text-sanguine">
-                  {e.company}
-                </a>{' '}
+                {e.link ? (
+                  <a href={e.link} className="underline decoration-1 underline-offset-4 hover:text-sanguine">
+                    {e.company}
+                  </a>
+                ) : (
+                  e.company
+                )}{' '}
                 · {e.role}
               </li>
             ))}
