@@ -5,6 +5,8 @@
 
 import { useMemo } from 'react';
 import { motion, useTransform, isMotionValue } from 'framer-motion';
+
+const MotionPath = motion.path;
 import { roughenPath } from './roughen';
 import { strokePasses, INK } from './strokeStyle';
 
@@ -35,7 +37,7 @@ export default function Stroke({
   return (
     <g>
       {ds.map((dd, i) => (
-        <motion.path
+        <MotionPath
           key={i}
           d={dd}
           pathLength={1}

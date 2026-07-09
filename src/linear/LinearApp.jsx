@@ -4,6 +4,8 @@
 
 import { useEffect } from 'react';
 import { motion, useScroll, useSpring, useMotionValue, useTransform, animate } from 'framer-motion';
+
+const MotionDiv = motion.div;
 import HeroSignature from '../signature/HeroSignature';
 import Stroke from '../charcoal/Stroke';
 import { hero, contact } from '../content/contact';
@@ -62,7 +64,7 @@ export default function LinearApp({ reduced }) {
       <main className="mx-auto max-w-xl px-8 py-14">
         <section id="hero">
           <HeroSignature className="h-auto w-full max-w-md" progress={sig} />
-          <motion.div
+          <MotionDiv
             initial={reduced ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: reduced ? 0 : 2.2, duration: 0.6 }}
@@ -76,7 +78,7 @@ export default function LinearApp({ reduced }) {
               <a className={link} href={contact.linkedin}>linkedin ↗</a>
               <a className={link} href={`mailto:${contact.email}`}>email ↗</a>
             </div>
-          </motion.div>
+          </MotionDiv>
         </section>
 
         <section className="mt-20">

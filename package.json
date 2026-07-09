@@ -14,7 +14,6 @@
     "@fontsource-variable/newsreader": "^5.2.10",
     "@fontsource-variable/shantell-sans": "^5.2.7",
     "framer-motion": "^12.29.2",
-    "lucide-react": "^0.563.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

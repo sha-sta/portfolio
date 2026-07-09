@@ -4,6 +4,8 @@
 import { motion, useTransform } from 'framer-motion';
 import Stroke from '../../charcoal/Stroke';
 
+const MotionDiv = motion.div;
+
 // deterministic per-section seed from its id
 function idSeed(id) {
   let h = 0;
@@ -27,7 +29,7 @@ export default function SectionFrame({
   const y = useTransform(presence, (p) => (1 - p) * 26);
 
   return (
-    <motion.div
+    <MotionDiv
       id={section.id}
       className={`absolute ${className}`}
       style={{
@@ -60,6 +62,6 @@ export default function SectionFrame({
         </div>
       )}
       {children}
-    </motion.div>
+    </MotionDiv>
   );
 }

@@ -4,6 +4,8 @@
 
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+
+const MotionDiv = motion.div;
 import { buildCamera } from './camera';
 import { WORLD_W, WORLD_H, sections } from './worldMap';
 import { useHashRoute } from '../routes/useHashRoute';
@@ -64,12 +66,12 @@ export default function WorldStage({ children, reducedMotion = false }) {
         ))}
       </div>
       <div className="fixed inset-0 overflow-hidden">
-        <motion.div
+        <MotionDiv
           className="absolute top-0 left-0 origin-top-left will-change-transform"
           style={{ width: WORLD_W, height: WORLD_H, transform }}
         >
           {children({ camera, progress: smooth, rawProgress: scrollYProgress })}
-        </motion.div>
+        </MotionDiv>
       </div>
     </>
   );
