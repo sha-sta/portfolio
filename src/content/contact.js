@@ -6,6 +6,6 @@ export const contact = {
 
 export const hero = {
   name: 'christian yoon',
-  line1: 'software engineer. builder of evidence-grounded AI systems.',
-  line2: 'cs @ johns hopkins ’28 · hodson trust scholar',
+  line1: 'machine learning · full-stack engineering · real-time systems',
+  line2: 'cs @ johns hopkins · hodson trust scholar',
 };
