@@ -1,5 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import { useMotionValue, useReducedMotion, animate } from 'framer-motion';
+import { useMotionValue, animate } from 'framer-motion';
+import { useAppMode } from './hooks/useAppMode';
+import LinearApp from './linear/LinearApp';
 import WorldStage from './world/WorldStage';
 import WorldSVG from './world/WorldSVG';
 import HeroSignature from './signature/HeroSignature';
@@ -24,9 +26,8 @@ const SECTION_COMPONENTS = {
   contact: ContactSection,
 };
 
-function WorldContent({ camera, progress }) {
-  const sig = useMotionValue(0);
-  const reduced = useReducedMotion();
+function WorldContent({ camera, progress, reduced }) {
+  const sig = useMotionValue(reduced ? 1 : 0);
 
   useEffect(() => {
     if (reduced) {
@@ -53,6 +54,7 @@ function WorldContent({ camera, progress }) {
 
 function App() {
   const [indexOpen, setIndexOpen] = useState(false);
+  const { mode, reduced } = useAppMode();
 
   if (PathEditor && new URLSearchParams(location.search).has('editor')) {
     return (
@@ -66,9 +68,15 @@ function App() {
     <div className="text-ink">
       <SketchNav onIndex={() => setIndexOpen(true)} />
       <IndexOverlay open={indexOpen} onClose={() => setIndexOpen(false)} />
-      <WorldStage>
-        {({ camera, progress }) => <WorldContent camera={camera} progress={progress} />}
-      </WorldStage>
+      {mode === 'linear' ? (
+        <LinearApp reduced={reduced} />
+      ) : (
+        <WorldStage reducedMotion={reduced}>
+          {({ camera, progress }) => (
+            <WorldContent camera={camera} progress={progress} reduced={reduced} />
+          )}
+        </WorldStage>
+      )}
     </div>
   );
 }

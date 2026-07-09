@@ -25,7 +25,9 @@ function SigStroke({ points, master, from, to, seed }) {
 
 // `progress` is an external MotionValue (0 → 1); the owner sequences it so
 // the master line can gate on the same value (line emerges as the pen lifts).
-export default function HeroSignature({ x, y, scale, progress }) {
+// With x/y/scale it positions itself in the world; with className it renders
+// as a normal flowing svg (linear mode).
+export default function HeroSignature({ x, y, scale, progress, className }) {
   const master = progress;
 
   // cumulative length fractions → each stroke draws in writing order
@@ -42,8 +44,10 @@ export default function HeroSignature({ x, y, scale, progress }) {
 
   return (
     <svg
-      className="pointer-events-none absolute"
-      style={{ left: x, top: y, width: SIG_W * scale, height: SIG_H * scale }}
+      className={className ?? 'pointer-events-none absolute'}
+      style={
+        className ? undefined : { left: x, top: y, width: SIG_W * scale, height: SIG_H * scale }
+      }
       viewBox={`0 0 ${SIG_W} ${SIG_H}`}
       aria-label="Christian Yoon's signature"
       role="img"
