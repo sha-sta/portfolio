@@ -79,15 +79,33 @@ export function buildCamera() {
       return d;
     });
 
+    // On arrival at a section, the camera eases off the line toward the
+    // section's `view` point (content center); between sections it rides the
+    // line itself.
+    const BLEND = 0.11;
+    const viewOffsets = sections.map((s, i) => ({
+      t: tStops[i],
+      dx: (s.view?.x ?? s.anchor.x) - s.anchor.x,
+      dy: (s.view?.y ?? s.anchor.y) - s.anchor.y,
+    }));
+
     const pointAt = (t) => {
       const c = Math.min(Math.max(t, 0), 1) * SAMPLES;
       const i = Math.floor(c);
       const f = c - i;
       const j = Math.min(i + 1, SAMPLES);
-      return {
-        x: table[i * 2] + (table[j * 2] - table[i * 2]) * f,
-        y: table[i * 2 + 1] + (table[j * 2 + 1] - table[i * 2 + 1]) * f,
-      };
+      let x = table[i * 2] + (table[j * 2] - table[i * 2]) * f;
+      let y = table[i * 2 + 1] + (table[j * 2 + 1] - table[i * 2 + 1]) * f;
+      for (const o of viewOffsets) {
+        const d = Math.abs(t - o.t);
+        if (d < BLEND) {
+          const w = 1 - d / BLEND;
+          const s = w * w * (3 - 2 * w); // smoothstep
+          x += o.dx * s;
+          y += o.dy * s;
+        }
+      }
+      return { x, y };
     };
 
     return { pointAt, tStops, total, segLengths, segmentDs, spans };

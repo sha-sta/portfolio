@@ -1,13 +1,28 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { useMotionValue, useReducedMotion, animate } from 'framer-motion';
 import WorldStage from './world/WorldStage';
 import WorldSVG from './world/WorldSVG';
 import HeroSignature from './signature/HeroSignature';
+import SketchNav from './nav/SketchNav';
+import IndexOverlay from './nav/IndexOverlay';
+import HeroSection from './world/sections/HeroSection';
+import WorkSection from './world/sections/WorkSection';
+import ProjectsSection from './world/sections/ProjectsSection';
+import OpenSourceSection from './world/sections/OpenSourceSection';
+import ContactSection from './world/sections/ContactSection';
 import { sections, SIGNATURE } from './world/worldMap';
 
 const PathEditor = import.meta.env.DEV
   ? lazy(() => import('./dev/PathEditor'))
   : null;
+
+const SECTION_COMPONENTS = {
+  hero: HeroSection,
+  work: WorkSection,
+  projects: ProjectsSection,
+  'open-source': OpenSourceSection,
+  contact: ContactSection,
+};
 
 function WorldContent({ camera, progress }) {
   const sig = useMotionValue(0);
@@ -24,22 +39,21 @@ function WorldContent({ camera, progress }) {
 
   return (
     <>
-      {sections.map((s) => (
-        <div
-          key={s.id}
-          className="absolute flex items-center justify-center rounded-sm border border-hairline"
-          style={{ left: s.box.x, top: s.box.y, width: s.box.w, height: s.box.h }}
-        >
-          <span className="font-display text-5xl lowercase">{s.label}</span>
-        </div>
-      ))}
       <WorldSVG camera={camera} progress={progress} gate={sig} />
+      {sections.map((s, i) => {
+        const Section = SECTION_COMPONENTS[s.id];
+        return (
+          <Section key={s.id} section={s} tStop={camera.tStops[i]} progress={progress} />
+        );
+      })}
       <HeroSignature x={SIGNATURE.x} y={SIGNATURE.y} scale={SIGNATURE.scale} progress={sig} />
     </>
   );
 }
 
 function App() {
+  const [indexOpen, setIndexOpen] = useState(false);
+
   if (PathEditor && new URLSearchParams(location.search).has('editor')) {
     return (
       <Suspense fallback={null}>
@@ -50,6 +64,8 @@ function App() {
 
   return (
     <div className="bg-paper text-ink">
+      <SketchNav onIndex={() => setIndexOpen(true)} />
+      <IndexOverlay open={indexOpen} onClose={() => setIndexOpen(false)} />
       <WorldStage>
         {({ camera, progress }) => <WorldContent camera={camera} progress={progress} />}
       </WorldStage>

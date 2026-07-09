@@ -17,34 +17,41 @@ export const sections = [
     // anchor = the signature flourish's end point: the line starts where the
     // pen lifts. signature image point (690, 203) at SIGNATURE placement.
     anchor: { x: 250 + 690 * 1.4, y: 450 + 203 * 1.4 },
+    view: { x: 1050, y: 780 },
     box: { x: 350, y: 320, w: 1400, h: 880 },
   },
   {
     id: 'work',
     label: 'work.',
     hash: 'work',
-    anchor: { x: 3080, y: 820 },
+    // anchors sit in each section's left margin — the line arrives like a
+    // sketchbook margin rule; the camera blends toward `view` (box center)
+    anchor: { x: 2290, y: 840 },
+    view: { x: 3060, y: 770 },
     box: { x: 2380, y: 260, w: 1420, h: 1160 },
   },
   {
     id: 'projects',
     label: 'projects.',
     hash: 'projects',
-    anchor: { x: 1980, y: 2380 },
+    anchor: { x: 1110, y: 2420 },
+    view: { x: 1970, y: 2340 },
     box: { x: 1200, y: 1820, w: 1580, h: 1200 },
   },
   {
     id: 'open-source',
     label: 'open source.',
     hash: 'open-source',
-    anchor: { x: 4080, y: 2200 },
+    anchor: { x: 3390, y: 2210 },
+    view: { x: 4080, y: 2210 },
     box: { x: 3480, y: 1780, w: 1240, h: 860 },
   },
   {
     id: 'contact',
     label: 'hit me up.',
     hash: 'contact',
-    anchor: { x: 5320, y: 2780 },
+    anchor: { x: 4690, y: 2780 },
+    view: { x: 5240, y: 2680 },
     box: { x: 4780, y: 2380, w: 1080, h: 800 },
   },
 ];
@@ -56,33 +63,33 @@ export const segments = [
     from: 'hero',
     to: 'work',
     waypoints: [
-      [1700, 520],
-      [2300, 1050],
+      [1750, 560],
+      [2080, 660],
     ],
   },
   {
     from: 'work',
     to: 'projects',
     waypoints: [
-      [3560, 1350],
-      [2900, 1750],
-      [2380, 2080],
+      [2050, 1420],
+      [1480, 1800],
+      [1090, 2080],
     ],
   },
   {
     from: 'projects',
     to: 'open-source',
     waypoints: [
-      [2620, 2820],
-      [3400, 2620],
+      [1500, 3000],
+      [2500, 2900],
     ],
   },
   {
     from: 'open-source',
     to: 'contact',
     waypoints: [
-      [4720, 2260],
-      [4980, 2560],
+      [3900, 2540],
+      [4300, 2760],
     ],
   },
 ];
