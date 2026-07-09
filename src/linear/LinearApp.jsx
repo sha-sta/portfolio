@@ -136,21 +136,27 @@ export default function LinearApp({ reduced }) {
 
         <section className="mt-20">
           <Heading id="open-source">open source.</Heading>
-          <div className="flex items-baseline gap-3">
-            <h3 className="font-display text-2xl font-medium">
-              <a href="https://github.com/unionai-oss/pandera" target="_blank" rel="noreferrer" className="hover:text-sanguine">{oss.project} ↗</a>
-            </h3>
-            <span className="font-hand text-sanguine text-sm">{oss.stars}</span>
-          </div>
-          <p className="text-ink-soft mt-1 text-[15px] italic">{oss.blurb}</p>
-          <ul className="mt-3 space-y-2.5 text-[15px] leading-relaxed">
-            {oss.prs.map((pr) => (
-              <li key={pr.id} className="flex gap-2.5">
-                <a href={pr.href} target="_blank" rel="noreferrer" className={`${link} shrink-0`}>{pr.id}</a>
-                <span>{pr.note}</span>
-              </li>
+          <div className="space-y-8">
+            {oss.map((os) => (
+              <div key={os.project}>
+                <div className="flex items-baseline gap-3">
+                  <h3 className="font-display text-2xl font-medium">
+                    <a href={os.href} target="_blank" rel="noreferrer" className="hover:text-sanguine">{os.project} ↗</a>
+                  </h3>
+                  <span className="font-hand text-sanguine text-sm">{os.stars}</span>
+                </div>
+                {os.blurb && <p className="text-ink-soft mt-1 text-[15px] italic">{os.blurb}</p>}
+                <ul className="mt-3 space-y-2.5 text-[15px] leading-relaxed">
+                  {os.prs.map((pr) => (
+                    <li key={pr.id} className="flex gap-2.5">
+                      <a href={pr.href} target="_blank" rel="noreferrer" className={`${link} shrink-0`}>{pr.id}</a>
+                      <span>{pr.note}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
         </section>
 
         <section className="mt-20 pb-16">
