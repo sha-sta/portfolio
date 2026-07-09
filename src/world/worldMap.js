@@ -81,19 +81,21 @@ export const segments = [
   {
     from: 'projects',
     to: 'open-source',
-    // swings wide below the projects text (marketbrain's row), rises through
-    // the empty right column
+    // swings wide below the projects grid (marketbrain's column bottoms out
+    // ~y2470) and only rises once past its right edge (x2910)
     waypoints: [
-      [1650, 2880],
-      [2600, 2620],
+      [1650, 2900],
+      [2700, 2720],
     ],
   },
   {
     from: 'open-source',
     to: 'contact',
+    // drops steeply out of the margin so it passes under the scikit-learn
+    // block (bottom ~y2320) before heading to contact
     waypoints: [
-      [3900, 2540],
-      [4300, 2760],
+      [3520, 2620],
+      [4200, 2840],
     ],
   },
 ];
