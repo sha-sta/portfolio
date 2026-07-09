@@ -1,17 +1,25 @@
 export const projects = [
   {
     id: 'ivry',
-    name: 'prediction markets',
-    tagline: 'ivry + a speech-to-trade pipeline',
+    name: 'ivry',
+    tagline: 'prediction-market intelligence',
     badge: null,
     bullets: [
-      'real-time pipeline normalizing fragmented Kalshi/Polymarket data; entity resolution (HDBSCAN + LLM verification) with a caching layer cutting latency 95%',
-      'live audio → ASR → spike detection → automated Kalshi execution; falsely-triggered speech spikes were systematically overpriced: +15.9pp hit-rate on a pre-registered sealed holdout',
+      'real-time pipeline normalizing fragmented Kalshi and Polymarket market data',
+      'entity resolution across markets (HDBSCAN + LLM verification); caching layer cut latency 95%',
     ],
-    links: [
-      { label: 'ivry', href: 'https://github.com/sumeirsoni/Ivry' },
-      { label: 'speech pipeline', href: 'https://github.com/sha-sta/speech-signal-pipeline' },
+    links: [{ label: 'github', href: 'https://github.com/sumeirsoni/Ivry' }],
+  },
+  {
+    id: 'speech-signals',
+    name: 'speech signals',
+    tagline: 'broadcast speech, traded',
+    badge: null,
+    bullets: [
+      'live broadcast audio → streaming Whisper ASR → spike detection → automated Kalshi execution',
+      'falsely-triggered speech spikes were systematically overpriced: +15.9pp hit-rate on a pre-registered sealed holdout',
     ],
+    links: [{ label: 'github', href: 'https://github.com/sha-sta/speech-signal-pipeline' }],
   },
   {
     id: 'galatea',
