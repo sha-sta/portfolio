@@ -4,6 +4,8 @@ import { useAppMode } from './hooks/useAppMode';
 import LinearApp from './linear/LinearApp';
 import WorldStage from './world/WorldStage';
 import WorldSVG from './world/WorldSVG';
+import Marginalia from './world/Marginalia';
+import ArtPiece from './world/ArtPiece';
 import HeroSignature from './signature/HeroSignature';
 import SketchNav from './nav/SketchNav';
 import IndexOverlay from './nav/IndexOverlay';
@@ -41,6 +43,19 @@ function WorldContent({ camera, progress, reduced }) {
   return (
     <>
       <WorldSVG camera={camera} progress={progress} gate={sig} />
+      <Marginalia camera={camera} progress={progress} />
+      <ArtPiece
+        camera={camera}
+        progress={progress}
+        src="/take-your-marks.webp"
+        caption="take your marks · charcoal, 2024"
+        x={2850}
+        y={2550}
+        w={840}
+        h={390}
+        seg={2}
+        frac={0.6}
+      />
       {sections.map((s, i) => {
         const Section = SECTION_COMPONENTS[s.id];
         return (

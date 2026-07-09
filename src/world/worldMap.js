@@ -62,26 +62,27 @@ export const segments = [
   {
     from: 'hero',
     to: 'work',
+    // leaves along the flourish's ending tangent (rightward, slight drop)
     waypoints: [
-      [1750, 560],
-      [2080, 660],
+      [1500, 785],
+      [1900, 810],
     ],
   },
   {
     from: 'work',
     to: 'projects',
     waypoints: [
-      [2050, 1420],
-      [1480, 1800],
-      [1090, 2080],
+      [2050, 1380],
+      [1400, 1720],
+      [1020, 2050],
     ],
   },
   {
     from: 'projects',
     to: 'open-source',
     waypoints: [
-      [1500, 3000],
-      [2500, 2900],
+      [1800, 2640],
+      [2600, 2470],
     ],
   },
   {

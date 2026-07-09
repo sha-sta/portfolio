@@ -3,10 +3,10 @@ export const experience = [
     id: 'iris',
     company: 'iris finance',
     role: 'software engineer intern',
-    when: 'dec 2025 — present',
+    when: 'dec 2025 to present',
     link: 'https://www.irisfinance.co',
     bullets: [
-      'built the AI knowledge base behind Fin, Iris’s customer- and employee-facing assistant — an evidence-grounded entity graph (Postgres/pgvector, S3, Claude) serving source-cited Q&A over REST and Slack',
+      'built the AI knowledge base behind Fin, Iris’s customer- and employee-facing assistant: an evidence-grounded entity graph (Postgres/pgvector, S3, Claude) serving source-cited Q&A over REST and Slack',
       'vector ETL with semantic embeddings + anomaly detection, killing manual preprocessing for 150+ enterprise clients',
       'SKU attribute-enrichment across a 178-org multi-tenant backend, zero schema migrations',
     ],
@@ -15,7 +15,7 @@ export const experience = [
     id: 'hazyeyes',
     company: 'hazyeyes',
     role: 'founding engineer',
-    when: 'mar — jun 2026',
+    when: 'mar to jun 2026',
     link: 'https://hazyeyesai.com',
     bullets: [
       'ML pipeline detecting alcohol impairment from OKN eye-tracking (CatBoost, Optuna, MLflow); landed an enterprise pilot with an Australian logistics company',
@@ -26,10 +26,10 @@ export const experience = [
     id: 'fumble',
     company: 'fumble',
     role: 'co-founder & founding engineer',
-    when: 'jun — nov 2025',
+    when: 'jun to nov 2025',
     link: 'https://www.fumble.chat',
     bullets: [
-      'real-time event-driven platform for 2,000+ active users — Next.js, Socket.IO, Redis pub/sub',
+      'real-time event-driven platform for 2,000+ active users, built on Next.js, Socket.IO, and Redis pub/sub',
       'set engineering standards for a 10-person team; landed a B2B pilot and $45K in Azure credits',
     ],
   },
@@ -37,7 +37,7 @@ export const experience = [
     id: 'nist',
     company: 'NIST',
     role: 'data science intern',
-    when: 'jun 2023 — aug 2024',
+    when: 'jun 2023 to aug 2024',
     link: 'https://www.nist.gov',
     bullets: [
       'automated the analysis of nanoscale X-ray scattering data end-to-end',

@@ -50,14 +50,29 @@ export function buildCamera() {
     for (const len of lengths) cum.push(cum[cum.length - 1] + len);
     const tStops = anchorIdx.map((pi) => cum[pi] / total);
 
-    // Uniform lookup table over the whole line.
+    // The camera rides its own smooth spline through the section VIEW points
+    // (not the line itself) — calm, direct travel while the line meanders
+    // nearby. Each camera span is mapped to the line-derived t range of its
+    // segment so arrivals stay in sync with the drawing.
+    const views = sections.map((s) => [s.view?.x ?? s.anchor.x, s.view?.y ?? s.anchor.y]);
+    const camSpans = catmullRomToSpans(views);
+    const camEls = camSpans.map((d) => {
+      const el = document.createElementNS(SVG_NS, 'path');
+      el.setAttribute('d', d);
+      svg.appendChild(el);
+      return el;
+    });
+    const camLengths = camEls.map((el) => el.getTotalLength());
+
     const table = new Float32Array((SAMPLES + 1) * 2);
-    let span = 0;
     for (let i = 0; i <= SAMPLES; i++) {
-      const target = (i / SAMPLES) * total;
-      while (span < lengths.length - 1 && cum[span + 1] < target) span++;
-      const local = target - cum[span];
-      const pt = els[span].getPointAtLength(Math.min(local, lengths[span]));
+      const t = i / SAMPLES;
+      let seg = 0;
+      while (seg < tStops.length - 2 && tStops[seg + 1] < t) seg++;
+      const local = (t - tStops[seg]) / (tStops[seg + 1] - tStops[seg]);
+      const pt = camEls[seg].getPointAtLength(
+        Math.min(Math.max(local, 0), 1) * camLengths[seg]
+      );
       table[i * 2] = pt.x;
       table[i * 2 + 1] = pt.y;
     }
@@ -79,33 +94,15 @@ export function buildCamera() {
       return d;
     });
 
-    // On arrival at a section, the camera eases off the line toward the
-    // section's `view` point (content center); between sections it rides the
-    // line itself.
-    const BLEND = 0.11;
-    const viewOffsets = sections.map((s, i) => ({
-      t: tStops[i],
-      dx: (s.view?.x ?? s.anchor.x) - s.anchor.x,
-      dy: (s.view?.y ?? s.anchor.y) - s.anchor.y,
-    }));
-
     const pointAt = (t) => {
       const c = Math.min(Math.max(t, 0), 1) * SAMPLES;
       const i = Math.floor(c);
       const f = c - i;
       const j = Math.min(i + 1, SAMPLES);
-      let x = table[i * 2] + (table[j * 2] - table[i * 2]) * f;
-      let y = table[i * 2 + 1] + (table[j * 2 + 1] - table[i * 2 + 1]) * f;
-      for (const o of viewOffsets) {
-        const d = Math.abs(t - o.t);
-        if (d < BLEND) {
-          const w = 1 - d / BLEND;
-          const s = w * w * (3 - 2 * w); // smoothstep
-          x += o.dx * s;
-          y += o.dy * s;
-        }
-      }
-      return { x, y };
+      return {
+        x: table[i * 2] + (table[j * 2] - table[i * 2]) * f,
+        y: table[i * 2 + 1] + (table[j * 2 + 1] - table[i * 2 + 1]) * f,
+      };
     };
 
     return { pointAt, tStops, total, segLengths, segmentDs, spans };

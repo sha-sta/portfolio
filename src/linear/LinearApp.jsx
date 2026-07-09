@@ -69,7 +69,6 @@ export default function LinearApp({ reduced }) {
             animate={{ opacity: 1 }}
             transition={{ delay: reduced ? 0 : 2.2, duration: 0.6 }}
           >
-            <p className="font-hand text-ink-faint mt-1 text-sm">yes, that’s my real signature</p>
             <h1 className="sr-only">christian yoon</h1>
             <p className="mt-6 text-xl">{hero.line1}</p>
             <p className="text-ink-soft mt-1 text-base italic">{hero.line2}</p>
@@ -131,6 +130,18 @@ export default function LinearApp({ reduced }) {
           </div>
         </section>
 
+        <figure className="mt-20">
+          <img
+            src="/take-your-marks.webp"
+            alt="Take Your Marks: charcoal drawing of a swimmer's feet on a starting block above a stormy sea"
+            loading="lazy"
+            className="border-hairline w-full border"
+          />
+          <figcaption className="font-hand text-ink-faint mt-2 text-sm">
+            take your marks · charcoal, 2024
+          </figcaption>
+        </figure>
+
         <section className="mt-20">
           <Heading id="open-source">open source.</Heading>
           <div className="flex items-baseline gap-3">
@@ -159,7 +170,7 @@ export default function LinearApp({ reduced }) {
             <a className={link} href={contact.github} target="_blank" rel="noreferrer">github ↗</a>
             <a className={link} href={contact.linkedin} target="_blank" rel="noreferrer">linkedin ↗</a>
           </div>
-          <p className="font-hand text-ink-faint mt-9 text-sm">drawn & written by hand — no template, promise.</p>
+          <p className="font-hand text-ink-faint mt-9 text-sm">drawn & written by hand. no template, promise.</p>
         </section>
       </main>
     </div>

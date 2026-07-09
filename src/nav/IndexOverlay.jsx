@@ -56,7 +56,7 @@ export default function IndexOverlay({ open, onClose }) {
           <ul className="space-y-2 text-lg">
             {projects.map((p) => (
               <li key={p.id}>
-                {p.name} —{' '}
+                {p.name} ·{' '}
                 {p.links.map((l, i) => (
                   <span key={l.href}>
                     {i > 0 && ' · '}
@@ -75,7 +75,7 @@ export default function IndexOverlay({ open, onClose }) {
                 <a href={e.link} className="underline decoration-1 underline-offset-4 hover:text-sanguine">
                   {e.company}
                 </a>{' '}
-                — {e.role}
+                · {e.role}
               </li>
             ))}
           </ul>

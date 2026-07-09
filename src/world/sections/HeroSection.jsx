@@ -5,10 +5,6 @@ export default function HeroSection({ section, tStop, progress }) {
   return (
     <SectionFrame section={section} tStop={tStop} progress={progress} heading={false}>
       {/* the signature (rendered by HeroSignature) is the name */}
-      <span className="font-hand text-ink-faint absolute top-[40px] right-[120px] -rotate-3 text-2xl">
-        yes, that’s my real signature
-      </span>
-
       <div className="absolute bottom-[10px] left-[30px] max-w-[880px]">
         <h1 className="sr-only">christian yoon</h1>
         <p className="text-[30px] leading-snug">{hero.line1}</p>
@@ -25,7 +21,7 @@ export default function HeroSection({ section, tStop, progress }) {
           </a>
         </div>
         <p className="font-hand text-ink-faint mt-9 text-[22px]">
-          scroll — follow the line ⟶
+          scroll, follow the line ⟶
         </p>
       </div>
     </SectionFrame>
