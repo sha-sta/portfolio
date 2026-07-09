@@ -39,6 +39,24 @@ body {
   min-width: 320px;
   min-height: 100vh;
   overflow-x: hidden;
+  /* baked paper tooth (public/paper.webp) under everything; the world pans
+     above it so the texture never re-rasterizes */
+  background-image:
+    radial-gradient(ellipse at 50% 40%, rgba(0, 0, 0, 0) 60%, rgba(60, 50, 30, 0.05) 100%),
+    url('/paper.webp');
+  background-size: cover, 420px 420px;
+  background-attachment: fixed, fixed;
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: color 120ms ease;
+}
+
+a:hover {
+  color: var(--color-sanguine);
+  text-decoration-style: wavy;
 }
 
 ::selection {

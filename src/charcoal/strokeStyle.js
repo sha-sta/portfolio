@@ -10,9 +10,9 @@ export const INK = 'var(--color-ink)';
 const styles = {
   // the master line the camera follows
   master: [
-    { width: 4, opacity: 0.82, amp: 2.2, wobble: 7, linecap: 'round' },
-    { width: 7, opacity: 0.16, amp: 3.6, wobble: 5, linecap: 'round' },
-    { width: 1.6, opacity: 0.5, amp: 2.8, wobble: 9, linecap: 'round' },
+    { width: 4, opacity: 0.8, amp: 2.2, wobble: 7, linecap: 'round' },
+    { width: 8, opacity: 0.2, amp: 5, wobble: 4, linecap: 'round' },
+    { width: 1.4, opacity: 0.45, amp: 3.4, wobble: 9, linecap: 'round' },
   ],
   // section frames, underlines, doodles
   sketch: [

@@ -63,7 +63,7 @@ function App() {
   }
 
   return (
-    <div className="bg-paper text-ink">
+    <div className="text-ink">
       <SketchNav onIndex={() => setIndexOpen(true)} />
       <IndexOverlay open={indexOpen} onClose={() => setIndexOpen(false)} />
       <WorldStage>
