@@ -14,8 +14,9 @@ export const sections = [
     id: 'hero',
     label: 'christian yoon.',
     hash: '',
-    anchor: { x: 1050, y: 750 },
-    // content box, centered-ish on anchor
+    // anchor = the signature flourish's end point: the line starts where the
+    // pen lifts. signature image point (690, 203) at SIGNATURE placement.
+    anchor: { x: 250 + 690 * 1.4, y: 450 + 203 * 1.4 },
     box: { x: 350, y: 320, w: 1400, h: 880 },
   },
   {
@@ -85,6 +86,9 @@ export const segments = [
     ],
   },
 ];
+
+// world placement of the hero signature (image space is 713x350)
+export const SIGNATURE = { x: 250, y: 450, scale: 1.4 };
 
 export const sectionById = Object.fromEntries(sections.map((s) => [s.id, s]));
 

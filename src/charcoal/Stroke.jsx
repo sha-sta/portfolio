@@ -26,8 +26,11 @@ export default function Stroke({
   );
 
   const mv = isMotionValue(progress);
+  // offset 1.02 (not 1.0) parks the round linecap fully off the path start,
+  // so undrawn strokes don't show a cap dot
+  const mapOffset = (v) => (1 - Math.min(Math.max(v, 0), 1)) * (v <= 0 ? 1.02 : 1);
   // eslint-disable-next-line react-hooks/rules-of-hooks -- progress kind is stable per mount
-  const dashoffset = mv ? useTransform(progress, (v) => 1 - Math.min(Math.max(v, 0), 1)) : 1 - progress;
+  const dashoffset = mv ? useTransform(progress, mapOffset) : mapOffset(progress);
 
   return (
     <g>
@@ -42,7 +45,7 @@ export default function Stroke({
           strokeOpacity={passes[i].opacity}
           strokeLinecap={passes[i].linecap}
           strokeLinejoin="round"
-          strokeDasharray="1"
+          strokeDasharray="1 2"
           style={{ strokeDashoffset: dashoffset }}
         />
       ))}
