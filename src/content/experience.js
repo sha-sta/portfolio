@@ -7,8 +7,8 @@ export const experience = [
     link: 'https://www.irisfinance.co',
     bullets: [
       'built the AI knowledge base behind Fin, Iris’s AI assistant, serving source-cited answers over REST and Slack',
-      'vector ETL pipeline that killed manual preprocessing for 150+ enterprise clients',
-      'SKU enrichment across a 178-org multi-tenant backend, zero schema migrations',
+      'vector ETL pipeline normalizing raw transaction reports with semantic embeddings and anomaly detection',
+      'SKU enrichment across a 150+ org multi-tenant backend, zero schema migrations',
     ],
   },
   {

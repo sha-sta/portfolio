@@ -1,8 +1,8 @@
 export const projects = [
   {
     id: 'ivry',
-    name: 'ivry',
-    tagline: 'prediction-market intelligence',
+    name: 'prediction markets',
+    tagline: 'ivry + a speech-to-trade pipeline',
     badge: null,
     bullets: [
       'real-time pipeline normalizing fragmented Kalshi/Polymarket data; entity resolution (HDBSCAN + LLM verification) with a caching layer cutting latency 95%',
