@@ -69,6 +69,16 @@ export function buildCamera() {
       return cum[b] - cum[a];
     });
 
+    // One merged single-subpath `d` per section-to-section segment, so the
+    // line engine can scrub each independently with dashoffset.
+    const segmentDs = sections.slice(0, -1).map((s, i) => {
+      const a = anchorIdx[i];
+      const b = anchorIdx[i + 1];
+      let d = spans[a];
+      for (let j = a + 1; j < b; j++) d += ' ' + spans[j].slice(spans[j].indexOf('C'));
+      return d;
+    });
+
     const pointAt = (t) => {
       const c = Math.min(Math.max(t, 0), 1) * SAMPLES;
       const i = Math.floor(c);
@@ -80,6 +90,6 @@ export function buildCamera() {
       };
     };
 
-    return { pointAt, tStops, total, segLengths, spans };
+    return { pointAt, tStops, total, segLengths, segmentDs, spans };
   });
 }
