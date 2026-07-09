@@ -11,43 +11,6 @@ const MotionDiv = motion.div;
 // paths are in doodle-local coordinates
 const DOODLES = [
   {
-    // gradient descent: a loss bowl, a dotted path down the slope, the ball
-    // resting at the minimum
-    id: 'descent',
-    x: 3150,
-    y: 1830,
-    w: 250,
-    h: 170,
-    seg: 2,
-    frac: 0.45,
-    paths: [
-      { d: 'M 15 30 C 55 155, 190 155, 232 38', role: 'sketch', seed: 61 },
-      { d: 'M 52 62 L 66 78', role: 'guide', seed: 62 },
-      { d: 'M 78 92 L 92 106', role: 'guide', seed: 63 },
-      { d: 'M 104 116 L 115 124', role: 'guide', seed: 64 },
-      { d: 'M 124 143 a 9 9 0 1 1 0.1 0', role: 'sketch', seed: 65 },
-    ],
-  },
-  {
-    // a bézier with its control handles out — the whole site is made of these
-    id: 'bezier',
-    x: 2840,
-    y: 1600,
-    w: 250,
-    h: 150,
-    seg: 1,
-    frac: 0.62,
-    paths: [
-      { d: 'M 20 120 C 85 22, 165 22, 230 120', role: 'sketch', seed: 81 },
-      { d: 'M 20 120 L 85 22', role: 'guide', seed: 82 },
-      { d: 'M 230 120 L 165 22', role: 'guide', seed: 83 },
-      { d: 'M 80 17 a 6 6 0 1 1 0.1 0', role: 'sketch', seed: 84 },
-      { d: 'M 160 17 a 6 6 0 1 1 0.1 0', role: 'sketch', seed: 85 },
-      { d: 'M 14 114 L 26 114 L 26 126 L 14 126 L 14 114', role: 'sketch', seed: 86 },
-      { d: 'M 224 114 L 236 114 L 236 126 L 224 126 L 224 114', role: 'sketch', seed: 87 },
-    ],
-  },
-  {
     // nodes and edges
     id: 'graph',
     x: 4750,

@@ -35,7 +35,8 @@ export default function Stroke({
   const dashoffset = mv ? useTransform(progress, mapOffset) : mapOffset(progress);
 
   return (
-    <g>
+    // multiply: overlapping strokes darken like real media instead of stacking flat
+    <g style={{ mixBlendMode: 'multiply' }}>
       {ds.map((dd, i) => (
         <MotionPath
           key={i}

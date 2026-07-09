@@ -18,9 +18,6 @@ export default function ContactSection({ section, tStop, progress }) {
           linkedin ↗
         </a>
       </div>
-      <p className="font-hand text-ink-faint mt-12 text-[21px]">
-        drawn & written by hand. no template, promise.
-      </p>
     </SectionFrame>
   );
 }

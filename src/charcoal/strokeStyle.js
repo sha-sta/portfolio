@@ -9,23 +9,28 @@
 export const INK = 'var(--color-ink)';
 export const GRAIN_PATTERN_ID = 'charcoalGrain';
 
+// Pencil/charcoal anatomy per stroke: a tight low-opacity soft edge UNDER a
+// grain-painted core, plus 1-2 hairline streaks riding along the stroke.
+// Softness comes from the edge pass hugging the core (not a wide halo).
 const styles = {
   // the master line the camera follows — weight matches the signature
   master: [
-    { width: 8.5, opacity: 0.95, amp: 0.5, wobble: 7, linecap: 'round', paint: 'grain' },
-    { width: 4.5, opacity: 0.7, amp: 2.2, wobble: 6, linecap: 'round', paint: 'grain' },
-    { width: 1.2, opacity: 0.3, amp: 3.8, wobble: 9, linecap: 'round', paint: 'ink' },
+    { width: 12.5, opacity: 0.14, amp: 0.9, wobble: 7, linecap: 'round', paint: 'grain' },
+    { width: 9, opacity: 0.88, amp: 0.4, wobble: 7, linecap: 'round', paint: 'grain' },
+    { width: 1.1, opacity: 0.28, amp: 2.1, wobble: 9, linecap: 'round', paint: 'ink' },
+    { width: 0.9, opacity: 0.22, amp: 3, wobble: 8, linecap: 'round', paint: 'ink' },
   ],
   // section underlines, doodles
   sketch: [
-    { width: 3, opacity: 0.9, amp: 0.8, wobble: 6, linecap: 'round', paint: 'grain' },
-    { width: 1, opacity: 0.28, amp: 2.2, wobble: 8, linecap: 'round', paint: 'ink' },
+    { width: 4.2, opacity: 0.14, amp: 0.7, wobble: 6, linecap: 'round', paint: 'grain' },
+    { width: 2.9, opacity: 0.85, amp: 0.6, wobble: 6, linecap: 'round', paint: 'grain' },
+    { width: 0.9, opacity: 0.26, amp: 1.9, wobble: 8, linecap: 'round', paint: 'ink' },
   ],
   // the signature: core follows the trace exactly
   signature: [
-    { width: 3.4, opacity: 0.97, amp: 0, wobble: 8, linecap: 'round', paint: 'grain' },
-    { width: 1.8, opacity: 0.55, amp: 0.8, wobble: 9, linecap: 'round', paint: 'grain' },
-    { width: 0.6, opacity: 0.3, amp: 1.3, wobble: 10, linecap: 'round', paint: 'ink' },
+    { width: 4.6, opacity: 0.14, amp: 0.5, wobble: 9, linecap: 'round', paint: 'grain' },
+    { width: 3.3, opacity: 0.92, amp: 0, wobble: 8, linecap: 'round', paint: 'grain' },
+    { width: 0.55, opacity: 0.28, amp: 1.1, wobble: 10, linecap: 'round', paint: 'ink' },
   ],
   // faint construction/guide lines
   guide: [{ width: 1.3, opacity: 0.35, amp: 1.2, wobble: 8, linecap: 'round', paint: 'grain' }],

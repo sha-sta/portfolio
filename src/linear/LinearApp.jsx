@@ -162,8 +162,6 @@ export default function LinearApp({ reduced }) {
             <a className={link} href={contact.github} target="_blank" rel="noreferrer">github ↗</a>
             <a className={link} href={contact.linkedin} target="_blank" rel="noreferrer">linkedin ↗</a>
           </div>
-          <p className="font-hand text-ink-faint mt-9 text-sm">drawn & written by hand. no template, promise.</p>
-
           <figure className="mt-14">
             <img
               src="/take-your-marks.webp"
@@ -172,7 +170,7 @@ export default function LinearApp({ reduced }) {
               className="border-hairline w-full border"
             />
             <figcaption className="mt-2">
-              <span className="font-display text-base italic">take your marks</span>
+              <span className="font-display text-base italic">“take your marks”</span>
               <span className="font-hand text-ink-faint block text-sm">christian yoon · charcoal · 2024</span>
             </figcaption>
           </figure>

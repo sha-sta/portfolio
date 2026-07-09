@@ -48,7 +48,7 @@ function WorldContent({ camera, progress, reduced }) {
       <ArtPiece
         progress={progress}
         src="/take-your-marks.webp"
-        title="take your marks"
+        title="“take your marks”"
         credit="christian yoon"
         x={5580}
         y={2350}

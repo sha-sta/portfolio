@@ -14,10 +14,11 @@ export const sections = [
     id: 'hero',
     label: 'christian yoon.',
     hash: '',
-    // the line STARTS INSIDE the flourish tail (image point ~(614,196)) and
-    // passes through the flourish end (690, 203) as its first waypoint — the
-    // overlap hides the seam between signature and line completely.
-    anchor: { x: 250 + 614 * 1.4, y: 450 + 196 * 1.4 },
+    // the line starts a hair past the flourish's end point (image pt 690,203),
+    // tangent-matched; same paint + width = no visible seam. Not AT the end
+    // point (round caps would stack and multiply into a dark dot) and never
+    // overlapping the flourish (multiply darkens overlaps).
+    anchor: { x: 250 + 690 * 1.4 + 6, y: 450 + 203 * 1.4 + 1.2 },
     view: { x: 1050, y: 780 },
     box: { x: 350, y: 320, w: 1400, h: 880 },
   },
@@ -63,10 +64,7 @@ export const segments = [
   {
     from: 'hero',
     to: 'work',
-    // first waypoint = the flourish's end point, so the overlap stretch
-    // traces the signature's own tail before continuing right
     waypoints: [
-      [250 + 690 * 1.4, 450 + 203 * 1.4],
       [1500, 785],
       [1900, 810],
     ],
