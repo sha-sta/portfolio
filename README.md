@@ -1,16 +1,36 @@
-# React + Vite
+# christianyoon.com
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio. One continuous charcoal line is the protagonist: my real
+signature draws itself, its final flourish becomes the line, and scrolling
+scrubs a camera along it across a 2D world of sections.
 
-Currently, two official plugins are available:
+## How it works
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **World/camera** — `src/world/`: sections live at fixed coordinates on a
+  6000×3400 canvas (`worldMap.js`). A scroll proxy owns the native scrollbar;
+  scroll progress maps to a position along the master line (sampled once into
+  a lookup table, `camera.js`), driving a single `translate3d` on the world div.
+- **The line** — `src/charcoal/`: every stroke is 2–3 stacked copies of the
+  path, deterministically jittered (`roughen.js`, seeded PRNG) and scrubbed
+  with `pathLength`-normalized dashoffset. No runtime SVG filters; paper
+  texture is baked offline to `public/paper.webp`.
+- **Signature** — `src/signature/`: centerline-traced from `cy-signature.png`
+  into ordered strokes that draw in writing order.
+- **Modes** — coarse pointers / small screens get a linear document
+  (`src/linear/`); `prefers-reduced-motion` pre-draws all strokes and cuts the
+  camera instead of panning.
+- **Authoring** — `npm run dev`, then `/?editor` for a draggable waypoint
+  editor over the whole world.
 
-## React Compiler
+Real charcoal scans go in `art/` (gitignored) and get processed into web
+assets; the simulated-vs-scanned texture seam is `src/charcoal/strokeStyle.js`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+React 19 · Vite 7 · Tailwind v4 · framer-motion (as a MotionValue engine)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```sh
+npm install
+npm run dev
+npm run build
+```

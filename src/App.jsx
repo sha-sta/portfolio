@@ -1,58 +1,82 @@
-import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Projects from './components/Projects';
-import Experience from './components/Experience';
-import Education from './components/Education';
-import Contact from './components/Contact';
-import Signature from './components/Signature';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { useMotionValue, animate } from 'framer-motion';
+import { useAppMode } from './hooks/useAppMode';
+import LinearApp from './linear/LinearApp';
+import WorldStage from './world/WorldStage';
+import WorldSVG from './world/WorldSVG';
+import HeroSignature from './signature/HeroSignature';
+import SketchNav from './nav/SketchNav';
+import IndexOverlay from './nav/IndexOverlay';
+import HeroSection from './world/sections/HeroSection';
+import WorkSection from './world/sections/WorkSection';
+import ProjectsSection from './world/sections/ProjectsSection';
+import OpenSourceSection from './world/sections/OpenSourceSection';
+import ContactSection from './world/sections/ContactSection';
+import { sections, SIGNATURE } from './world/worldMap';
 
-function App() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+const PathEditor = import.meta.env.DEV
+  ? lazy(() => import('./dev/PathEditor'))
+  : null;
+
+const SECTION_COMPONENTS = {
+  hero: HeroSection,
+  work: WorkSection,
+  projects: ProjectsSection,
+  'open-source': OpenSourceSection,
+  contact: ContactSection,
+};
+
+function WorldContent({ camera, progress, reduced }) {
+  const sig = useMotionValue(reduced ? 1 : 0);
 
   useEffect(() => {
-    const updateMousePosition = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', updateMousePosition);
-
-    return () => {
-      window.removeEventListener('mousemove', updateMousePosition);
-    };
-  }, []);
+    if (reduced) {
+      sig.set(1);
+      return undefined;
+    }
+    const controls = animate(sig, 1, { duration: 2.1, ease: 'linear', delay: 0.35 });
+    return () => controls.stop();
+  }, [sig, reduced]);
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-white selection:bg-purple-500/30 overflow-x-hidden">
-      <div className="fixed inset-0 z-0 bg-neutral-950 pointer-events-none" />
+    <>
+      <WorldSVG camera={camera} progress={progress} gate={sig} />
+      {sections.map((s, i) => {
+        const Section = SECTION_COMPONENTS[s.id];
+        return (
+          <Section key={s.id} section={s} tStop={camera.tStops[i]} progress={progress} />
+        );
+      })}
+      <HeroSignature x={SIGNATURE.x} y={SIGNATURE.y} scale={SIGNATURE.scale} progress={sig} />
+    </>
+  );
+}
 
-      {/* Fixed Navbar Container */}
-      <div id="navbar-container" className="fixed top-0 left-0 right-0 z-40">
-        {/* Background layer (z-10) — sliding text goes behind this visually via z-[5] */}
-        <div className="absolute inset-0 bg-neutral-950/5 backdrop-blur-md border-none z-10" />
-        {/* Content layer (z-20) — nav links + landed text on top */}
-        <div className="relative z-20 max-w-6xl mx-auto px-6 pt-3 pb-1.5 md:px-12 md:pt-4 md:pb-2">
-          <Navbar />
-        </div>
-      </div>
+function App() {
+  const [indexOpen, setIndexOpen] = useState(false);
+  const { mode, reduced } = useAppMode();
 
-      <div className="relative z-10">
-        <Hero />
-      </div>
+  if (PathEditor && new URLSearchParams(location.search).has('editor')) {
+    return (
+      <Suspense fallback={null}>
+        <PathEditor />
+      </Suspense>
+    );
+  }
 
-      {/* Main Content with Background to cover Hero */}
-      <div className="relative z-20 bg-neutral-950 border-t border-neutral-900/50 min-h-screen">
-        <div className="max-w-6xl mx-auto px-6 md:px-12 space-y-32">
-          <Experience />
-          <Projects />
-          <Contact />
-        </div>
-
-        <footer>
-          <Signature />
-        </footer>
-      </div>
+  return (
+    <div className="text-ink">
+      <SketchNav onIndex={() => setIndexOpen(true)} />
+      <IndexOverlay open={indexOpen} onClose={() => setIndexOpen(false)} />
+      {mode === 'linear' ? (
+        <LinearApp reduced={reduced} />
+      ) : (
+        <WorldStage reducedMotion={reduced}>
+          {({ camera, progress }) => (
+            <WorldContent camera={camera} progress={progress} reduced={reduced} />
+          )}
+        </WorldStage>
+      )}
     </div>
   );
 }

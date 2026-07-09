@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# raw charcoal scans (processed into public/)
+art/
+
+# playwright mcp artifacts
+.playwright-mcp/

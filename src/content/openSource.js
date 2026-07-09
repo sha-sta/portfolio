@@ -1,0 +1,22 @@
+export const openSource = {
+  project: 'pandera',
+  stars: '4.4K★',
+  blurb: 'statistical data-testing library for dataframes — 3 merged fixes to the pandas backend',
+  prs: [
+    {
+      id: '#2404',
+      href: 'https://github.com/unionai-oss/pandera/pull/2404',
+      note: 'root-caused an NA-handling bug across all 11 masked nullable dtypes; aligned per-element coercion with pandas astype semantics — 48 new tests, 100% patch coverage',
+    },
+    {
+      id: '#2400',
+      href: 'https://github.com/unionai-oss/pandera/pull/2400',
+      note: 'column-parser ordering',
+    },
+    {
+      id: '#2391',
+      href: 'https://github.com/unionai-oss/pandera/pull/2391',
+      note: 'categorical dtype-mismatch reporting',
+    },
+  ],
+};
