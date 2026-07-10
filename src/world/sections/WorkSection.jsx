@@ -23,7 +23,23 @@ export default function WorkSection({ section, tStop, progress }) {
               {e.bullets.map((b, i) => (
                 <li key={i} className="flex gap-3">
                   <span aria-hidden="true" className="text-ink-faint">–</span>
-                  <span>{b}</span>
+                  <span>
+                    {typeof b === 'string' ? b : b.text}
+                    {/* strings have a legacy .link() method — must type-check */}
+                    {typeof b === 'object' && b.link && (
+                      <>
+                        {' '}
+                        <a
+                          href={b.link.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="underline decoration-1 underline-offset-4 hover:text-sanguine"
+                        >
+                          {b.link.label} ↗
+                        </a>
+                      </>
+                    )}
+                  </span>
                 </li>
               ))}
             </ul>

@@ -97,7 +97,17 @@ export default function LinearApp({ reduced }) {
                   {e.bullets.map((b, i) => (
                     <li key={i} className="flex gap-2.5">
                       <span aria-hidden="true" className="text-ink-faint">–</span>
-                      <span>{b}</span>
+                      <span>
+                        {typeof b === 'string' ? b : b.text}
+                        {typeof b === 'object' && b.link && (
+                          <>
+                            {' '}
+                            <a href={b.link.href} target="_blank" rel="noreferrer" className={link}>
+                              {b.link.label} ↗
+                            </a>
+                          </>
+                        )}
+                      </span>
                     </li>
                   ))}
                 </ul>

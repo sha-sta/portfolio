@@ -41,7 +41,10 @@ export const experience = [
     link: 'https://www.nist.gov',
     bullets: [
       'automated the analysis of nanoscale X-ray scattering data end to end',
-      'co-authored a peer-reviewed paper in Soft Matter; presented at the ACS national conference',
+      {
+        text: 'co-authored a peer-reviewed paper in Soft Matter; presented at the ACS national conference',
+        link: { label: 'doi', href: 'https://doi.org/10.1039/d6sm00313c' },
+      },
     ],
   },
 ];
