@@ -39,7 +39,7 @@ export const projects = [
     badge: null,
     bullets: [
       'self-updating financial knowledge graph from news and SEC filings; a verbatim-evidence gate + ticker/CIK hard-key resolution block fabricated entities',
-      'in a gate-on/off eval, 11.6% (22/189) of asserted facts had ungrounded evidence and the deterministic gate caught every one; hybrid vector + full-text RAG serves source-cited Q&A',
+      'in a gate-on/off eval, 11.6% of asserted facts had ungrounded evidence and the deterministic gate caught every one; hybrid vector + full-text RAG serves source-cited Q&A',
     ],
     links: [{ label: 'github', href: 'https://github.com/sha-sta/market-brain' }],
   },
