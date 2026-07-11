@@ -9,12 +9,13 @@ import Stroke from '../charcoal/Stroke';
 const LEAD = 0.08; // the line stays this far ahead of the camera (in t)
 
 function SegmentStroke({ d, t0, t1, progress, gate, seed }) {
-  // gate = signature draw progress: the line only emerges in the last 2%
-  // of the signature — i.e., the instant the pen lifts off the flourish
+  // gate = the eased 0 → 1 handoff that runs after the signature completes:
+  // the line's lead grows in over ~0.6s as the pen lifts off the flourish,
+  // instead of the full LEAD popping in at once
   const inputs = gate ? [progress, gate] : [progress];
   const segProgress = useTransform(inputs, (vals) => {
     const v = vals[0];
-    const g = gate ? Math.min(Math.max((vals[1] - 0.98) / 0.02, 0), 1) : 1;
+    const g = gate ? vals[1] : 1;
     const lead = Math.min(v + LEAD * g, 1);
     return (lead - t0) / (t1 - t0);
   });
