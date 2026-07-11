@@ -67,8 +67,10 @@ function valueNoise(count, period, rand) {
 }
 
 // d → jittered d. amp = max normal offset (world units), wobble = noise period
-// in samples (bigger = lazier drift), seed = pass identity.
-export function roughenPath(d, { amp = 1.5, wobble = 6, seed = 1, step = 12 } = {}) {
+// in samples (bigger = lazier drift), seed = pass identity. offset = constant
+// shift along the normal: parallel "fiber" lines riding beside the centerline
+// (they converge at the pinned ends, like pencil fibers at a pen lift).
+export function roughenPath(d, { amp = 1.5, wobble = 6, seed = 1, step = 12, offset = 0 } = {}) {
   const { points } = samplePathPoints(d, step);
   if (points.length < 3) return d;
 
@@ -82,7 +84,7 @@ export function roughenPath(d, { amp = 1.5, wobble = 6, seed = 1, step = 12 } = 
     const len = Math.hypot(dx, dy) || 1;
     // normal = (-dy, dx) / len; ends pinned so joined strokes stay joined
     const pin = i === 0 || i === points.length - 1 ? 0 : 1;
-    const off = noise[i] * amp * pin;
+    const off = (noise[i] * amp + offset) * pin;
     return [x + (-dy / len) * off, y + (dx / len) * off];
   });
   return catmullRomToPath(out, 0.8);

@@ -39,12 +39,27 @@ function Heading({ id, children }) {
 
 export default function LinearApp({ reduced }) {
   const sig = useMotionValue(reduced ? 1 : 0);
+  // deferred fiber passes fade in after the draw (keeps the mobile draw cheap)
+  const finish = useMotionValue(reduced ? 1 : 0);
 
   useEffect(() => {
-    if (reduced) return undefined;
-    const controls = animate(sig, 1, { duration: 2.1, ease: 'linear', delay: 0.3 });
-    return () => controls.stop();
-  }, [sig, reduced]);
+    if (reduced) {
+      sig.set(1);
+      finish.set(1);
+      return undefined;
+    }
+    let cancelled = false;
+    let settle;
+    const draw = animate(sig, 1, { duration: 2.1, ease: 'linear', delay: 0.3 });
+    draw.then(() => {
+      if (!cancelled) settle = animate(finish, 1, { duration: 0.6, ease: 'easeOut' });
+    });
+    return () => {
+      cancelled = true;
+      draw.stop();
+      settle?.stop();
+    };
+  }, [sig, finish, reduced]);
 
   // hash nav (#/work) → scroll to the anchor
   useEffect(() => {
@@ -63,7 +78,7 @@ export default function LinearApp({ reduced }) {
       <GutterLine reduced={reduced} />
       <main className="mx-auto max-w-xl px-8 py-14">
         <section id="hero">
-          <HeroSignature className="h-auto w-full max-w-md" progress={sig} />
+          <HeroSignature className="h-auto w-full max-w-md" progress={sig} finish={finish} />
           <MotionDiv
             initial={reduced ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}

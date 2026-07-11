@@ -8,7 +8,32 @@ import { motion, useTransform, isMotionValue } from 'framer-motion';
 
 const MotionPath = motion.path;
 import { roughenPath } from './roughen';
-import { strokePasses, INK, GRAIN_PATTERN_ID } from './strokeStyle';
+import { strokePasses, strokeMask, INK, GRAIN_PATTERN_ID } from './strokeStyle';
+
+// offset 1.02 (not 1.0) parks the round linecap fully off the path start,
+// so undrawn strokes don't show a cap dot
+const mapOffset = (v) => (1 - Math.min(Math.max(v, 0), 1)) * (v <= 0 ? 1.02 : 1);
+
+function StrokePass({ d, pass, widthScale, color, dashoffset, finish }) {
+  // deferred passes sit out the draw (cheaper animation frame) and fade in
+  // once `finish` runs 0 → 1 after the pen lifts
+  const deferred = Boolean(pass.defer && finish);
+  // eslint-disable-next-line react-hooks/rules-of-hooks -- deferred is stable per mount
+  const opacity = deferred ? useTransform(finish, (v) => v * pass.opacity) : pass.opacity;
+  return (
+    <MotionPath
+      d={d}
+      pathLength={1}
+      fill="none"
+      stroke={pass.paint === 'grain' ? `url(#${GRAIN_PATTERN_ID}) #23201a` : color}
+      strokeWidth={pass.width * widthScale}
+      strokeLinecap={pass.linecap}
+      strokeLinejoin="round"
+      strokeDasharray="1 2"
+      style={{ strokeDashoffset: deferred ? 0 : dashoffset, strokeOpacity: opacity }}
+    />
+  );
+}
 
 export default function Stroke({
   d,
@@ -17,39 +42,39 @@ export default function Stroke({
   seed = 1,
   color = INK,
   widthScale = 1,
+  finish, // optional MotionValue, 0 → 1 after the draw completes
 }) {
   const passes = strokePasses(role);
   const ds = useMemo(
     () =>
       passes.map((p, i) =>
-        roughenPath(d, { amp: p.amp, wobble: p.wobble, seed: seed * 7919 + i * 101 })
+        roughenPath(d, {
+          amp: p.amp,
+          wobble: p.wobble,
+          seed: seed * 7919 + i * 101,
+          offset: (p.off ?? 0) * widthScale,
+        })
       ),
-    [d, passes, seed]
+    [d, passes, seed, widthScale]
   );
 
   const mv = isMotionValue(progress);
-  // offset 1.02 (not 1.0) parks the round linecap fully off the path start,
-  // so undrawn strokes don't show a cap dot
-  const mapOffset = (v) => (1 - Math.min(Math.max(v, 0), 1)) * (v <= 0 ? 1.02 : 1);
   // eslint-disable-next-line react-hooks/rules-of-hooks -- progress kind is stable per mount
   const dashoffset = mv ? useTransform(progress, mapOffset) : mapOffset(progress);
 
   return (
-    // multiply: overlapping strokes darken like real media instead of stacking flat
-    <g style={{ mixBlendMode: 'multiply' }}>
+    // multiply: overlapping strokes darken like real media instead of stacking
+    // flat; the role's paper-tooth mask breaks the vector edge like dry media
+    <g style={{ mixBlendMode: 'multiply' }} mask={`url(#${strokeMask(role)})`}>
       {ds.map((dd, i) => (
-        <MotionPath
+        <StrokePass
           key={i}
           d={dd}
-          pathLength={1}
-          fill="none"
-          stroke={passes[i].paint === 'grain' ? `url(#${GRAIN_PATTERN_ID}) #23201a` : color}
-          strokeWidth={passes[i].width * widthScale}
-          strokeOpacity={passes[i].opacity}
-          strokeLinecap={passes[i].linecap}
-          strokeLinejoin="round"
-          strokeDasharray="1 2"
-          style={{ strokeDashoffset: dashoffset }}
+          pass={passes[i]}
+          widthScale={widthScale}
+          color={color}
+          dashoffset={dashoffset}
+          finish={finish}
         />
       ))}
     </g>
