@@ -53,7 +53,9 @@ export const sections = [
     label: 'hit me up.',
     hash: 'contact',
     anchor: { x: 4690, y: 2780 },
-    view: { x: 5420, y: 2650 },
+    // view sits low enough to frame both the contact text and the enlarged
+    // closing drawing hung below-right of it
+    view: { x: 5420, y: 2800 },
     box: { x: 4780, y: 2380, w: 1080, h: 800 },
   },
 ];

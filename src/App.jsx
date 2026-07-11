@@ -4,7 +4,6 @@ import { useAppMode } from './hooks/useAppMode';
 import LinearApp from './linear/LinearApp';
 import WorldStage from './world/WorldStage';
 import WorldSVG from './world/WorldSVG';
-import Marginalia from './world/Marginalia';
 import ArtPiece from './world/ArtPiece';
 import HeroSignature from './signature/HeroSignature';
 import GrainDefs from './charcoal/GrainDefs';
@@ -31,29 +30,41 @@ const SECTION_COMPONENTS = {
 
 function WorldContent({ camera, progress, reduced }) {
   const sig = useMotionValue(reduced ? 1 : 0);
+  // runs 0 → 1 after the signature completes: eases the master line's lead in
+  // (no end-of-draw pop) and fades in the deferred hairline pass
+  const finish = useMotionValue(reduced ? 1 : 0);
 
   useEffect(() => {
     if (reduced) {
       sig.set(1);
+      finish.set(1);
       return undefined;
     }
-    const controls = animate(sig, 1, { duration: 2.1, ease: 'linear', delay: 0.35 });
-    return () => controls.stop();
-  }, [sig, reduced]);
+    let cancelled = false;
+    let settle;
+    const draw = animate(sig, 1, { duration: 2.1, ease: 'linear', delay: 0.35 });
+    draw.then(() => {
+      if (!cancelled) settle = animate(finish, 1, { duration: 0.6, ease: 'easeOut' });
+    });
+    return () => {
+      cancelled = true;
+      draw.stop();
+      settle?.stop();
+    };
+  }, [sig, finish, reduced]);
 
   return (
     <>
-      <WorldSVG camera={camera} progress={progress} gate={sig} />
-      <Marginalia camera={camera} progress={progress} />
+      <WorldSVG camera={camera} progress={progress} gate={finish} />
       <ArtPiece
         progress={progress}
         src="/take-your-marks.webp"
         title="“take your marks”"
         credit="christian yoon"
-        x={5580}
-        y={2350}
-        w={760}
-        h={360}
+        x={5040}
+        y={2700}
+        w={990}
+        h={470}
       />
       {sections.map((s, i) => {
         const Section = SECTION_COMPONENTS[s.id];
@@ -61,7 +72,13 @@ function WorldContent({ camera, progress, reduced }) {
           <Section key={s.id} section={s} tStop={camera.tStops[i]} progress={progress} />
         );
       })}
-      <HeroSignature x={SIGNATURE.x} y={SIGNATURE.y} scale={SIGNATURE.scale} progress={sig} />
+      <HeroSignature
+        x={SIGNATURE.x}
+        y={SIGNATURE.y}
+        scale={SIGNATURE.scale}
+        progress={sig}
+        finish={finish}
+      />
     </>
   );
 }
