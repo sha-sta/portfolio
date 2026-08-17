@@ -44,8 +44,9 @@ in the dashboard, no vercel config in-repo).
 ## Hard rules (user-confirmed, do not regress)
 
 - NO em dashes anywhere in rendered copy.
-- HazyEyes and Fumble: plain text, never linked (cofounder took over the
-  hazyeyes domain; fumble link intentionally removed).
+- Mira (formerly HazyEyes; the old name must not appear anywhere on the site)
+  links to https://www.trymira.app. Fumble: plain text, never linked
+  (link intentionally removed).
 - No runtime SVG filters, ever (feTurbulence only in offline bakes).
 - Strokes must not read as solid marker, and NEVER put a lower-opacity pass
   at the stroke edge (a wide soft pass under a darker core reads "laminated").
