@@ -3,9 +3,9 @@ export const projects = [
     id: 'ivry',
     name: 'ivry',
     tagline: 'prediction-market intelligence',
-    badge: 'in-person interview · Y Combinator W26',
+    badge: null,
     bullets: [
-      'real-time pipeline normalizing fragmented prediction-market data across Kalshi, Polymarket, and Manifold',
+      'real-time pipeline normalizing fragmented Kalshi, Polymarket, and Manifold market data',
       'entity resolution across markets (HDBSCAN + LLM verification); caching layer cut latency 95%',
     ],
     links: [{ label: 'github', href: 'https://github.com/sumeirsoni/Ivry' }],
@@ -17,7 +17,7 @@ export const projects = [
     badge: null,
     bullets: [
       'live broadcast audio → streaming Whisper ASR → spike detection → automated Kalshi execution',
-      'preregistered 28-event study measured ~18 cents/contract mispricing around on-air mentions, ~11 cents on held-out events; ran live across 10 events and ~15M order-book ticks',
+      'preregistered study measured ~18¢/contract mispricing around on-air mentions, ~11¢ held out; ran live on Kalshi',
     ],
     links: [{ label: 'github', href: 'https://github.com/sha-sta/speech-signal-pipeline' }],
   },
