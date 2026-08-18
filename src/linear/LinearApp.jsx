@@ -86,7 +86,7 @@ export default function LinearApp({ reduced }) {
           >
             <h1 className="sr-only">christian yoon</h1>
             <p className="mt-6 text-xl">{hero.line1}</p>
-            <p className="text-ink-soft mt-1 text-base italic">{hero.line2}</p>
+            {hero.line2 && <p className="text-ink-soft mt-1 text-base italic">{hero.line2}</p>}
             <div className="mt-5 flex gap-6">
               <a className={link} href={contact.github}>github ↗</a>
               <a className={link} href={contact.linkedin}>linkedin ↗</a>
