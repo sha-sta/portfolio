@@ -27,8 +27,8 @@ export const projects = [
     tagline: 'graph nets for water quality',
     badge: '1st place, Maryland · Stockholm Junior Water Prize',
     bullets: [
-      'dual-model architecture (graph matrix factorization + GNN) imputing missing spatiotemporal data; 0.27 mg/L MAE predicting biochemical oxygen demand, 22.85% better than existing low-cost models',
-      'a $385 sensor standing in for $20K+ commercial hardware',
+      'dual-model architecture (graph matrix factorization + GNN) imputing missing spatiotemporal water-quality data',
+      'replaced $20K+ commercial hardware with a $385 sensor suite at near-industry accuracy',
     ],
     links: [{ label: 'github', href: 'https://github.com/sha-sta/GALATEA' }],
   },
