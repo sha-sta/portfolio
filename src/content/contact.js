@@ -10,7 +10,7 @@ export const hero = {
     { text: 'cs @ ' },
     { text: 'johns hopkins', href: 'https://www.cs.jhu.edu' },
     { text: ' · ' },
-    { text: 'hodson trust scholar', href: 'https://apply.jhu.edu/tuition-aid/types-of-financial-aid/merit-scholarships/' },
+    { text: 'hodson trust scholar', href: 'https://meritscholarships.org/undergraduate-scholarships/hodson-trust-scholarship' },
   ],
   line2: null,
 };
