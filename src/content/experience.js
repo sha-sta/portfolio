@@ -18,7 +18,6 @@ export const experience = [
     link: 'https://www.trymira.app',
     bullets: [
       'iPhone app detecting impairment (alcohol, fatigue) from eye movements; 1k+ recording sessions',
-      'accepted to the Antler Founder Residency (NYC, ~3% acceptance)',
     ],
   },
   {
