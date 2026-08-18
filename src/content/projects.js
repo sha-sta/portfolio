@@ -6,7 +6,7 @@ export const projects = [
     badge: null,
     bullets: [
       'real-time pipeline normalizing fragmented Kalshi, Polymarket, and Manifold market data',
-      'entity resolution across markets (HDBSCAN + LLM verification); caching layer cut latency 95%',
+      'entity resolution across markets (HDBSCAN + LLM verification)',
     ],
     links: [{ label: 'github', href: 'https://github.com/sumeirsoni/Ivry' }],
   },
