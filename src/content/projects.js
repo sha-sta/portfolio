@@ -17,7 +17,7 @@ export const projects = [
     badge: null,
     bullets: [
       'live broadcast audio → streaming Whisper ASR → spike detection → automated Kalshi execution',
-      'preregistered study measured ~18¢/contract mispricing around on-air mentions, ~11¢ held out; ran live on Kalshi',
+      'found ~18¢/contract of mispricing around on-air mentions; traded it live on Kalshi',
     ],
     links: [{ label: 'github', href: 'https://github.com/sha-sta/speech-signal-pipeline' }],
   },
@@ -39,7 +39,7 @@ export const projects = [
     badge: null,
     bullets: [
       'self-updating financial knowledge graph from news and SEC filings; a verbatim-evidence gate + ticker/CIK hard-key resolution block fabricated entities',
-      'in a gate-on/off eval, 11.6% of asserted facts had ungrounded evidence and the deterministic gate caught every one; hybrid vector + full-text RAG serves source-cited Q&A',
+      'the gate caught every ungrounded fact in evaluation; hybrid vector + full-text RAG serves source-cited Q&A',
     ],
     links: [{ label: 'github', href: 'https://github.com/sha-sta/market-brain' }],
   },
