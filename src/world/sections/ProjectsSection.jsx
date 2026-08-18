@@ -7,10 +7,13 @@ export default function ProjectsSection({ section, tStop, progress }) {
       <div className="grid grid-cols-2 gap-x-14 gap-y-9">
         {projects.map((p) => (
           <article key={p.id} id={`project-${p.id}`}>
-            <div className="flex items-baseline gap-5">
-              <h3 className="font-display text-[34px] font-medium lowercase">{p.name}</h3>
-              <span className="text-ink-faint text-[19px] italic">{p.tagline}</span>
-            </div>
+            <h3 className="font-display text-[34px] font-medium lowercase">
+              {p.links?.[0] ? (
+                <a href={p.links[0].href} target="_blank" rel="noreferrer" className="hover:text-sanguine">{p.name} ↗</a>
+              ) : (
+                p.name
+              )}
+            </h3>
             {p.badge && (
               <p className="font-hand text-sanguine mt-1 text-[19px]">{p.badge}</p>
             )}
@@ -22,19 +25,6 @@ export default function ProjectsSection({ section, tStop, progress }) {
                 </li>
               ))}
             </ul>
-            <div className="mt-3 flex gap-7 text-[20px]">
-              {p.links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="underline decoration-1 underline-offset-4 hover:text-sanguine"
-                >
-                  {l.label} ↗
-                </a>
-              ))}
-            </div>
           </article>
         ))}
       </div>

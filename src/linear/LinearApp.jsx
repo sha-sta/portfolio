@@ -144,10 +144,13 @@ export default function LinearApp({ reduced }) {
           <div className="space-y-10">
             {projects.map((p) => (
               <article key={p.id}>
-                <div className="flex flex-wrap items-baseline gap-x-3">
-                  <h3 className="font-display text-2xl font-medium lowercase">{p.name}</h3>
-                  <span className="text-ink-faint text-sm italic">{p.tagline}</span>
-                </div>
+                <h3 className="font-display text-2xl font-medium lowercase">
+                  {p.links?.[0] ? (
+                    <a href={p.links[0].href} target="_blank" rel="noreferrer" className="hover:text-sanguine">{p.name} ↗</a>
+                  ) : (
+                    p.name
+                  )}
+                </h3>
                 {p.badge && <p className="font-hand text-sanguine mt-0.5 text-sm">{p.badge}</p>}
                 <ul className="mt-2 space-y-1.5 text-[15px] leading-relaxed">
                   {p.bullets.map((b, i) => (
@@ -157,11 +160,6 @@ export default function LinearApp({ reduced }) {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-2 flex gap-5 text-[15px]">
-                  {p.links.map((l) => (
-                    <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className={link}>{l.label} ↗</a>
-                  ))}
-                </div>
               </article>
             ))}
           </div>

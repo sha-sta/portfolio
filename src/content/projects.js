@@ -2,7 +2,7 @@ export const projects = [
   {
     id: 'ivry',
     name: 'ivry',
-    tagline: 'prediction-market intelligence',
+    tagline: null,
     badge: null,
     bullets: [
       'real-time pipeline normalizing fragmented Kalshi, Polymarket, and Manifold market data',
@@ -13,7 +13,7 @@ export const projects = [
   {
     id: 'speech-signals',
     name: 'speech signals',
-    tagline: 'broadcast speech, traded',
+    tagline: null,
     badge: null,
     bullets: [
       'live broadcast audio → streaming Whisper ASR → spike detection → automated Kalshi execution',
@@ -24,7 +24,7 @@ export const projects = [
   {
     id: 'galatea',
     name: 'galatea',
-    tagline: 'graph nets for water quality',
+    tagline: null,
     badge: '1st place, Maryland · Stockholm Junior Water Prize',
     bullets: [
       'dual-model architecture (graph matrix factorization + GNN) imputing missing spatiotemporal water-quality data',
@@ -35,7 +35,7 @@ export const projects = [
   {
     id: 'marketbrain',
     name: 'marketbrain',
-    tagline: 'a knowledge graph that refuses to hallucinate',
+    tagline: null,
     badge: null,
     bullets: [
       'self-updating financial knowledge graph from news and SEC filings; a verbatim-evidence gate + ticker/CIK hard-key resolution block fabricated entities',
