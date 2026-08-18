@@ -14,7 +14,7 @@ export const experience = [
     id: 'mira',
     company: 'mira',
     role: 'co-founder',
-    when: 'mar 2026 to present',
+    when: 'jul 2026 to present',
     link: 'https://www.trymira.app',
     bullets: [
       'iPhone app detecting impairment (alcohol, fatigue) from eye movements; live TestFlight program with 1k+ recording sessions',
