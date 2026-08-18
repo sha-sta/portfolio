@@ -35,7 +35,17 @@ export default function HeroSection({ section, tStop, progress }) {
       {/* the signature (rendered by HeroSignature) is the name */}
       <div className="absolute bottom-[10px] left-[30px] max-w-[880px]">
         <h1 className="sr-only">christian yoon</h1>
-        <p className="text-[30px] leading-snug">{hero.line1}</p>
+        <p className="text-[30px] leading-snug">
+          {hero.line1.map((seg, i) =>
+            seg.href ? (
+              <a key={i} className="underline decoration-1 underline-offset-4 hover:text-sanguine" href={seg.href} target="_blank" rel="noreferrer">
+                {seg.text}
+              </a>
+            ) : (
+              <span key={i}>{seg.text}</span>
+            ),
+          )}
+        </p>
         {hero.line2 && <p className="text-ink-soft mt-2 text-[24px] italic">{hero.line2}</p>}
         <div className="mt-7 flex gap-9 text-[22px]">
           <a className="underline decoration-1 underline-offset-4 hover:text-sanguine" href={contact.github}>

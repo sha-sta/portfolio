@@ -85,7 +85,15 @@ export default function LinearApp({ reduced }) {
             transition={{ delay: reduced ? 0 : 2.2, duration: 0.6 }}
           >
             <h1 className="sr-only">christian yoon</h1>
-            <p className="mt-6 text-xl">{hero.line1}</p>
+            <p className="mt-6 text-xl">
+              {hero.line1.map((seg, i) =>
+                seg.href ? (
+                  <a key={i} className={link} href={seg.href} target="_blank" rel="noreferrer">{seg.text}</a>
+                ) : (
+                  <span key={i}>{seg.text}</span>
+                ),
+              )}
+            </p>
             {hero.line2 && <p className="text-ink-soft mt-1 text-base italic">{hero.line2}</p>}
             <div className="mt-5 flex gap-6">
               <a className={link} href={contact.github}>github ↗</a>

@@ -6,6 +6,11 @@ export const contact = {
 
 export const hero = {
   name: 'christian yoon',
-  line1: 'cs @ johns hopkins · hodson trust scholar',
+  line1: [
+    { text: 'cs @ ' },
+    { text: 'johns hopkins', href: 'https://www.cs.jhu.edu' },
+    { text: ' · ' },
+    { text: 'hodson trust scholar', href: 'https://apply.jhu.edu/tuition-aid/types-of-financial-aid/merit-scholarships/' },
+  ],
   line2: null,
 };
